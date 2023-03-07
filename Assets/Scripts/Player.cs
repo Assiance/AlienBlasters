@@ -4,13 +4,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     float _jumpEndTime;
-    [SerializeField] float _horizontalVelocity = 3;
+    [SerializeField] float _maxHorizontalSpeed = 5;
     [SerializeField] float _jumpVelocity = 5;
     [SerializeField] float _jumpDuration = 0.5f;
     [SerializeField] Sprite _jumpSprite;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _footOffset = 0.5f;
     [SerializeField] private int _jumpsRemaining;
+    [SerializeField] float _acceleration = 10;
 
     public bool IsGrounded;
     
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
     {
         UpdateGrounding();
 
-        _horizontal = Input.GetAxis("Horizontal");
+        var horizontalInput = Input.GetAxis("Horizontal");
         Debug.Log(_horizontal);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         var vertical = rb.velocity.y;
@@ -65,7 +66,8 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Fire1") && _jumpEndTime > Time.time)
             vertical = _jumpVelocity;
 
-        _horizontal *= _horizontalVelocity;
+        var desiredHorizontal = horizontalInput * _maxHorizontalSpeed;
+        _horizontal = Mathf.Lerp(_horizontal, desiredHorizontal, Time.deltaTime * _acceleration);
         rb.velocity = new Vector2(_horizontal, vertical);
         UpdateSprite();
     }
