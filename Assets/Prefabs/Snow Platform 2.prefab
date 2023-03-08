@@ -10,11 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2706561901351903228, guid: f2d81e8b79f6e4445978b83a4d40f928, type: 3}
       propertyPath: m_Name
-      value: Snow Platform 2 Variant
+      value: Snow Platform 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706561901351903228, guid: f2d81e8b79f6e4445978b83a4d40f928, type: 3}
+      propertyPath: m_TagString
+      value: Snow
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179635406026014590, guid: f2d81e8b79f6e4445978b83a4d40f928, type: 3}
+      propertyPath: m_TagString
+      value: Snow
       objectReference: {fileID: 0}
     - target: {fileID: 7325085226007297304, guid: f2d81e8b79f6e4445978b83a4d40f928, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7325085226007297304, guid: f2d81e8b79f6e4445978b83a4d40f928, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,6 +63,10 @@ PrefabInstance:
     - target: {fileID: 7325085226007297304, guid: f2d81e8b79f6e4445978b83a4d40f928, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378311958298391607, guid: f2d81e8b79f6e4445978b83a4d40f928, type: 3}
+      propertyPath: m_TagString
+      value: Snow
       objectReference: {fileID: 0}
     - target: {fileID: 7623997114221774704, guid: f2d81e8b79f6e4445978b83a4d40f928, type: 3}
       propertyPath: m_Sprite

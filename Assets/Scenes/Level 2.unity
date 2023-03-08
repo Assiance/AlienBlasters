@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 151676448}
   - component: {fileID: 151676450}
   m_Layer: 0
-  m_Name: grassMid
-  m_TagString: Untagged
+  m_Name: Snow Ground
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1448,8 +1448,8 @@ GameObject:
   - component: {fileID: 1360162377}
   - component: {fileID: 1360162376}
   m_Layer: 0
-  m_Name: grassMid (6)
-  m_TagString: Untagged
+  m_Name: Snow Ground
+  m_TagString: Snow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
