@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     float _horizontal;
     int _jumpsRemaining;
     float _jumpEndTime;
-    int _coins;
+    public int Coins { get; private set; }
 
     void Awake()
     {
@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
+
+        FindObjectOfType<PlayerPanel>().Bind(this);
     }
 
     void OnDrawGizmos()
@@ -131,7 +133,7 @@ public class Player : MonoBehaviour
 
     public void AddPoint()
     {
-        _coins++;
+        Coins++;
         _audioSource.PlayOneShot(_coinSfx);
     }
 }
