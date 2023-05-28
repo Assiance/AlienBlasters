@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _groundAcceleration = 10;
     [SerializeField] float _snowAcceleration = 1;
     [SerializeField] AudioClip _coinSfx;
+    [SerializeField] AudioClip _hurtSfx;
     [SerializeField] float _knockbackVelocity = 400f;
 
     public bool IsGrounded;
@@ -158,5 +159,6 @@ public class Player : MonoBehaviour
         }
 
         _rb.AddForce(-hitNormal * _knockbackVelocity);
+        _audioSource.PlayOneShot(_hurtSfx);
     }
 }
