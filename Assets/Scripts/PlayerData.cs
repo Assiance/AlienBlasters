@@ -4,5 +4,5 @@
 public class PlayerData
 {
     public int Coins;
-    public int Health;
+    public int Health = 6;
 }

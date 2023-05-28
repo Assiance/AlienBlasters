@@ -5,7 +5,8 @@ public class Spikes : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Player"))
-            SceneManager.LoadScene(0);
+        var player = other.gameObject.GetComponent<Player>();
+        if (player)
+            player.TakeDamage();
     }
 }

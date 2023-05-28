@@ -1341,7 +1341,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1364,6 +1364,18 @@ PolygonCollider2D:
       - {x: 0.5, y: 0.453125}
       - {x: 0.421875, y: 0.5}
   m_UseDelaunayMesh: 0
+--- !u!114 &1269195518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269195513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6abd0ff4ddfeedf49bde7d72a73df74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1306267257
 GameObject:
   m_ObjectHideFlags: 0
@@ -3027,7 +3039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 373975030008183036, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.031145576
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 373975030008183036, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3057,18 +3069,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 508593881108810508, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 508593881108810508, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 508593881108810508, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1283511609
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831930354518165741, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831930354518165741, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831930354518165741, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1283511609
+      objectReference: {fileID: 0}
+    - target: {fileID: 5291101744502427148, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7835767252542650952, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
       propertyPath: m_Name
       value: Lava
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4665923767434941367, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+    - {fileID: 4268660766662226088, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7835767252542650952, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1269195517}
+    - targetCorrespondingSourceObject: {fileID: 7835767252542650952, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1269195518}
   m_SourcePrefab: {fileID: 100100000, guid: 78aff918f72c60f4dbcd72e032db4881, type: 3}
 --- !u!1001 &3669583752224606773
 PrefabInstance:
