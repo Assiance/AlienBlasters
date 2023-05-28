@@ -7,6 +7,6 @@ public class Spikes : MonoBehaviour
     {
         var player = other.gameObject.GetComponent<Player>();
         if (player)
-            player.TakeDamage();
+            player.TakeDamage(other.contacts[0].normal);
     }
 }
