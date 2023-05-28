@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     [SerializeField] float _footOffset = 0.5f;
     [SerializeField] float _groundAcceleration = 10;
     [SerializeField] float _snowAcceleration = 1;
-
+    [SerializeField] AudioClip _coinSfx;
+    
     public bool IsGrounded;
     public bool IsOnSnow;
 
@@ -131,5 +132,6 @@ public class Player : MonoBehaviour
     public void AddPoint()
     {
         _coins++;
+        _audioSource.PlayOneShot(_coinSfx);
     }
 }
