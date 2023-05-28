@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerPanel : MonoBehaviour
 {
     [SerializeField] TMP_Text _scoreText;
-    
+
     Player _player;
 
     public void Bind(Player player)
@@ -14,6 +14,7 @@ public class PlayerPanel : MonoBehaviour
 
     void Update()
     {
-        _scoreText.SetText(_player.Coins.ToString());
+        if (_player)
+            _scoreText.SetText(_player.Coins.ToString());
     }
 }
