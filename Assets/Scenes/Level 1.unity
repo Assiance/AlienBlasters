@@ -2596,6 +2596,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 702043290688560943, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 702043290688560943, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 702043290688560943, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 702043290688560943, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 702043290688560943, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 702043290688560943, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5374001570790141149, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
       propertyPath: m_Name
       value: Player Canvas
@@ -2683,6 +2707,10 @@ PrefabInstance:
     - target: {fileID: 6873605914116796906, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467773543233370113, guid: fa29152e401ca8c45b0c6361fac83ade, type: 3}
+      propertyPath: m_Name
+      value: Player Panel 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3165,10 +3193,6 @@ PrefabInstance:
     - target: {fileID: 73479394157680392, guid: f7a9aa3beaa97e944ba25514b83c2219, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 865417399889518854, guid: f7a9aa3beaa97e944ba25514b83c2219, type: 3}
-      propertyPath: _knockbackVelocity
-      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1805027257255395013, guid: f7a9aa3beaa97e944ba25514b83c2219, type: 3}
       propertyPath: m_Name
