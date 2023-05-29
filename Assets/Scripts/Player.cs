@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     PlayerData _playerData = new PlayerData();
 
     public int Coins { get => _playerData.Coins; private set => _playerData.Coins = value; }
+    public int Health => _playerData.Health;
 
     void Awake()
     {
