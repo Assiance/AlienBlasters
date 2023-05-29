@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
 
     PlayerData _playerData = new PlayerData();
 
+    public event Action CoinsChanged;
+
     public int Coins { get => _playerData.Coins; private set => _playerData.Coins = value; }
     public int Health => _playerData.Health;
 
@@ -142,6 +144,7 @@ public class Player : MonoBehaviour
     {
         Coins++;
         _audioSource.PlayOneShot(_coinSfx);
+        CoinsChanged?.Invoke();
     }
 
     public void Bind(PlayerData playerData)
