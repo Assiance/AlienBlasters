@@ -1,11 +1,15 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    [SerializeField] List<PlayerData> _playerDatas = new List<PlayerData>();
+
+    PlayerInputManager _playerInputManager;
 
     void Awake()
     {
@@ -18,7 +22,22 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        GetComponent<PlayerInputManager>().onPlayerJoined += HandlePlayerJoined;
+        _playerInputManager = GetComponent<PlayerInputManager>();
+        _playerInputManager.onPlayerJoined += HandlePlayerJoined;
+
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+
+    void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Menu")
+        {
+            _playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
+        }
+        else
+        {
+            _playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;
+        }
     }
 
     void HandlePlayerJoined(PlayerInput playerInput)
@@ -40,6 +59,4 @@ public class GameManager : MonoBehaviour
 
         return _playerDatas[playerIndex];
     }
-
-    [SerializeField] List<PlayerData> _playerDatas = new List<PlayerData>();
 }
