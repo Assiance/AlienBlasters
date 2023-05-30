@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
 
         SceneManager.sceneLoaded += HandleSceneLoaded;
 
-        AllGameNames = PlayerPrefs.GetString("AllGameNames").Split(',').ToList();   
+        var rawGameNames = PlayerPrefs.GetString("AllGameNames");
+        AllGameNames = rawGameNames == string.Empty ? new List<string>() : rawGameNames.Split(',').ToList();
     }
 
     void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -89,10 +90,10 @@ public class GameManager : MonoBehaviour
     public void NewGame()
     {
         Debug.Log("New Game");
-        
+
         _gameData = new GameData();
         _gameData.GameName = DateTime.Now.ToString("G");
-        
+
         SceneManager.LoadScene("Level 1");
     }
 
