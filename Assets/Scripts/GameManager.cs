@@ -95,4 +95,12 @@ public class GameManager : MonoBehaviour
         
         SceneManager.LoadScene("Level 1");
     }
+
+    public void DeleteGame(string gameName)
+    {
+        AllGameNames.Remove(gameName);
+        PlayerPrefs.DeleteKey(gameName);
+        PlayerPrefs.SetString("AllGameNames", string.Join(",", AllGameNames));
+        PlayerPrefs.Save();
+    }
 }

@@ -15,4 +15,10 @@ public class LoadGameButton : MonoBehaviour
         _gameName = gameName;
         GetComponentInChildren<TMP_Text>().SetText(gameName);
     }
+
+    public void DeleteGame()
+    {
+        GameManager.Instance.DeleteGame(_gameName);
+        Destroy(gameObject);
+    }
 }
