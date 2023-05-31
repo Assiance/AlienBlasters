@@ -8,9 +8,14 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] Vector3 _position2;
     [Range(0, 1)]
     [SerializeField] float _percentAcross;
+    [SerializeField] float _speed;
+
+    [ContextMenu(nameof(SetPosition1))] public void SetPosition1() => _position1 = transform.position;
+    [ContextMenu(nameof(SetPosition2))] public void SetPosition2() => _position2 = transform.position;
 
     void Update()
     {
+        _percentAcross = Mathf.PingPong(Time.time * _speed, 1f);
         transform.position = Vector3.Lerp(_position1, _position2, _percentAcross);
     }
 
@@ -26,7 +31,17 @@ public class MovingPlatform : MonoBehaviour
         Gizmos.DrawWireCube(currentPosition, collider.bounds.size);
     }
 
-    [ContextMenu(nameof(SetPosition1))] public void SetPosition1() => _position1 = transform.position;
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        var player = collision.gameObject.GetComponent<Player>();
+        if (player != null)
+            player.transform.SetParent(transform);
+    }
 
-    [ContextMenu(nameof(SetPosition2))] public void SetPosition2() => _position2 = transform.position;
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        var player = collision.gameObject.GetComponent<Player>();
+        if (player != null)
+            player.transform.SetParent(null);
+    }
 }
