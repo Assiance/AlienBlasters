@@ -48,6 +48,9 @@ TagManager:
   - name: Player
     uniqueID: 4179577503
     locked: 0
+  - name: Props
+    uniqueID: 4267355311
+    locked: 0
   - name: Water
     uniqueID: 3011455687
     locked: 0
