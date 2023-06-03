@@ -167,4 +167,9 @@ public class Player : MonoBehaviour
         _audioSource.PlayOneShot(_hurtSfx);
         HealthChanged?.Invoke();
     }
+
+    public void StopJump()
+    {
+        _jumpEndTime = Time.time;
+    }
 }
