@@ -19,6 +19,14 @@ public class Ladybug : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
+    void OnDrawGizmos()
+    {
+        Vector2 offset = _direction * GetComponent<Collider2D>().bounds.extents.x;
+        Vector2 origin = (Vector2)transform.position + offset;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(origin, origin + _direction * _raycastDistance);
+    }
+
     // Update is called once per frame
     void Update()
     {
