@@ -1,4 +1,6 @@
+using System.Numerics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 public class Ladybug : MonoBehaviour
 {
@@ -21,10 +23,25 @@ public class Ladybug : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Vector2 offset = _direction * GetComponent<Collider2D>().bounds.extents.x;
+        var collider = GetComponent<Collider2D>();
+        
+        Vector2 offset = _direction * collider.bounds.extents.x;
         Vector2 origin = (Vector2)transform.position + offset;
         Gizmos.color = Color.red;
         Gizmos.DrawLine(origin, origin + _direction * _raycastDistance);
+
+        var bounds = collider.bounds;
+
+        if (_direction == Vector2.left)
+        {
+            Vector2 bottomLeft = new Vector2(bounds.center.x - bounds.extents.x, bounds.center.y - bounds.extents.y);
+            Gizmos.DrawLine(bottomLeft, bottomLeft + Vector2.down * _raycastDistance);
+        }
+        else
+        {
+            Vector2 bottomRight = new Vector2(bounds.center.x + bounds.extents.x, bounds.center.y - bounds.extents.y);
+            Gizmos.DrawLine(bottomRight, bottomRight + Vector2.down * _raycastDistance);
+        }
     }
 
     // Update is called once per frame
