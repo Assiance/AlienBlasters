@@ -3172,10 +3172,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1474149822431244971, guid: deb787ade1abbc646b36355fd2e2eb36, type: 3}
-      propertyPath: _raycastDistance
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 2807286294575697749, guid: deb787ade1abbc646b36355fd2e2eb36, type: 3}
       propertyPath: m_Name
       value: ladybug
