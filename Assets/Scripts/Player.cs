@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     float _horizontal;
     int _jumpsRemaining;
     float _jumpEndTime;
+    int _coins;
 
     void Awake()
     {
@@ -126,5 +127,10 @@ public class Player : MonoBehaviour
             _spriteRenderer.flipX = false;
         else if (_horizontal < 0)
             _spriteRenderer.flipX = true;
+    }
+
+    public void AddPoint()
+    {
+        _coins++;
     }
 }
