@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     public bool IsGrounded;
     public bool IsOnSnow;
+    public int Coins { get; private set; }
 
     Animator _animator;
     SpriteRenderer _spriteRenderer;
@@ -26,7 +27,6 @@ public class Player : MonoBehaviour
     float _horizontal;
     int _jumpsRemaining;
     float _jumpEndTime;
-    int _coins;
 
     void Awake()
     {
@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
+
+        FindObjectOfType<PlayerCanvas>().Bind(this);
     }
 
     void OnDrawGizmos()
@@ -132,7 +134,7 @@ public class Player : MonoBehaviour
 
     public void AddPoint()
     {
-        _coins++;
+        Coins++;
         _audioSource.PlayOneShot(_coinSfx);
     }
 }
