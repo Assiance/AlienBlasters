@@ -3,6 +3,7 @@ using System;
 [Serializable]
 public class PlayerData
 {
-    public int Coins { get; set; }
-    public int Health { get; set; }
+    //DO NOT USE PROPERTIES. THEY DONT SHOW UP IN THE INSPECTOR
+    public int Coins;
+    public int Health = 6;
 }

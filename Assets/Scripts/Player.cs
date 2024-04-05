@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -143,5 +144,15 @@ public class Player : MonoBehaviour
     public void Bind(PlayerData playerData)
     {
         _playerData = playerData;
+    }
+
+    public void TakeDamage()
+    {
+        _playerData.Health--;
+        if (_playerData.Health <= 0)
+        {
+            SceneManager.LoadScene(0);
+            return;
+        }
     }
 }
