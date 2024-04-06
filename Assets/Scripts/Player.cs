@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] float _groundAcceleration = 10;
     [SerializeField] float _snowAcceleration = 1;
     [SerializeField] AudioClip _coinSfx;
+    [SerializeField] AudioClip _hurtSfx;
+    [SerializeField] AudioClip _deathSfx;
     [SerializeField] float _knockbackVelocity = 400;
 
     public bool IsGrounded;
@@ -152,10 +154,12 @@ public class Player : MonoBehaviour
         _playerData.Health--;
         if (_playerData.Health <= 0)
         {
+            //_audioSource.PlayOneShot(_deathSfx);
             SceneManager.LoadScene(0);
             return;
         }
 
         _rb.AddForce(-hitNormal * _knockbackVelocity);
+        _audioSource.PlayOneShot(_hurtSfx);
     }
 }
