@@ -10,7 +10,7 @@ public class Spikes : MonoBehaviour
             var player = other.collider.GetComponent<Player>();
             if (player)
             {
-                player.TakeDamage();
+                player.TakeDamage(other.contacts[0].normal);
             }
         }
     }
