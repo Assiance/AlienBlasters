@@ -12,26 +12,25 @@ public class PlayerPanel : MonoBehaviour
     public void Bind(Player player)
     {
         _player = player;
-        _player.CoinsChanged += UpdateCoins;
+        _player.OnCoinsChanged += UpdateCoins;
+        _player.OnHealthChanged += UpdateHealth;
 
-        //Call UpdateCoins once to set the initial value
+        //Call once to set the initial value
         UpdateCoins();
+        UpdateHealth();
+    }
+
+    void UpdateHealth()
+    {
+        for (int i = 0; i < _hearts.Length; i++)
+        {
+            var heart = _hearts[i];
+            heart.enabled = i < _player.Health;
+        }
     }
 
     void UpdateCoins()
     {
         _scoreText.SetText(_player.Coins.ToString());
-    }
-
-    void Update()
-    {
-        if (_player)
-        {
-            for (int i = 0; i < _hearts.Length; i++)
-            {
-                var heart = _hearts[i];
-                heart.enabled = i < _player.Health;
-            }
-        }
     }
 }

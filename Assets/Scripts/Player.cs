@@ -22,7 +22,9 @@ public class Player : MonoBehaviour
 
     PlayerData _playerData = new PlayerData();
 
-    public event Action CoinsChanged;
+    public event Action OnCoinsChanged;
+    public event Action OnHealthChanged;
+
     public int Coins { get => _playerData.Coins; private set => _playerData.Coins = value; }
     public int Health => _playerData.Health;
 
@@ -144,7 +146,7 @@ public class Player : MonoBehaviour
     {
         Coins++;
         _audioSource.PlayOneShot(_coinSfx);
-        CoinsChanged?.Invoke();
+        OnCoinsChanged?.Invoke();
     }
 
     public void Bind(PlayerData playerData)
@@ -163,5 +165,6 @@ public class Player : MonoBehaviour
 
         _rb.AddForce(-hitNormal * _knockbackVelocity);
         _audioSource.PlayOneShot(_hurtSfx);
+        OnHealthChanged?.Invoke();
     }
 }
