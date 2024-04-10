@@ -12,13 +12,21 @@ public class PlayerPanel : MonoBehaviour
     public void Bind(Player player)
     {
         _player = player;
+        _player.CoinsChanged += UpdateCoins;
+
+        //Call UpdateCoins once to set the initial value
+        UpdateCoins();
+    }
+
+    void UpdateCoins()
+    {
+        _scoreText.SetText(_player.Coins.ToString());
     }
 
     void Update()
     {
         if (_player)
         {
-            _scoreText.SetText(_player.Coins.ToString());
             for (int i = 0; i < _hearts.Length; i++)
             {
                 var heart = _hearts[i];
