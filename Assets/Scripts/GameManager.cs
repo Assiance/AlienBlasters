@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] List<PlayerData> _playerDatas = new List<PlayerData>();
+
     public static GameManager Instance { get; private set; }
 
     PlayerInputManager _playerInputManager;
@@ -45,7 +48,7 @@ public class GameManager : MonoBehaviour
         player.Bind(playerData);
     }
 
-    private PlayerData GetPlayerData(int playerIndex)
+    PlayerData GetPlayerData(int playerIndex)
     {
         if (_playerDatas.Count <= playerIndex)
         {
@@ -56,5 +59,9 @@ public class GameManager : MonoBehaviour
         return _playerDatas[playerIndex];
     }
 
-    [SerializeField] List<PlayerData> _playerDatas = new List<PlayerData>();
+
+    public void NewGame()
+    {
+        Debug.Log("New Game Called");
+    }
 }
