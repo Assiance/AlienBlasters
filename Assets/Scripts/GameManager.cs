@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,7 +37,27 @@ public class GameManager : MonoBehaviour
         if (arg0.name == "Menu")
             _playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
         else
+        {
             _playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;
+            SaveGame();
+        }
+
+    }
+
+    void SaveGame()
+    {
+        var text = JsonUtility.ToJson(_gameData);
+        Debug.Log("Saving Game: " + text);
+        PlayerPrefs.SetString("Game1", text);
+    }
+
+    public void LoadGame()
+    {
+        var text = PlayerPrefs.GetString("Game1");
+        Debug.Log("Loading Game: " + text);
+        _gameData = JsonUtility.FromJson<GameData>(text);
+
+        SceneManager.LoadScene("Level 1");
     }
 
     void HandlePlayerJoined(PlayerInput playerInput)
