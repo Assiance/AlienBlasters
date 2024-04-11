@@ -20,7 +20,7 @@ public class LoadGameButton : MonoBehaviour
     public void DeleteGame()
     {
         GameManager.Instance.DeleteGame(_gameName);
-    
+        Destroy(gameObject);
     }
 
     public void SetGameName(string gameName)
