@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -10,6 +11,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    public List<string> AllGameNames = new List<string>();
 
     [SerializeField] GameData _gameData;
     
@@ -30,6 +33,10 @@ public class GameManager : MonoBehaviour
         _playerInputManager.onPlayerJoined += HandlePlayerJoined;
 
         SceneManager.sceneLoaded += HandleSceneLoaded;
+
+        var commaSeperatedGameNames = PlayerPrefs.GetString("AllGameNames");
+        Debug.Log("commaSeperatedGameNames: " + commaSeperatedGameNames);
+        AllGameNames = commaSeperatedGameNames.Split(",").ToList();
     }
 
     void HandleSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -48,7 +55,15 @@ public class GameManager : MonoBehaviour
     {
         var text = JsonUtility.ToJson(_gameData);
         Debug.Log("Saving Game: " + text);
-        PlayerPrefs.SetString("Game1", text);
+
+        if (AllGameNames.Contains(_gameData.GameName) == false)
+            AllGameNames.Add(_gameData.GameName);
+
+        string commaSeperatedGameNames = string.Join(",", AllGameNames);
+        
+        PlayerPrefs.SetString("AllGameNames", commaSeperatedGameNames);
+        PlayerPrefs.SetString(_gameData.GameName, text);
+        PlayerPrefs.Save();
     }
 
     public void LoadGame()
@@ -85,6 +100,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("New Game Called");
         _gameData = new GameData();
+        _gameData.GameName = DateTime.Now.ToString("G");
         SceneManager.LoadScene("Level 1");
     }
 }
