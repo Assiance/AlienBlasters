@@ -66,9 +66,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void LoadGame()
+    public void LoadGame(string gameName)
     {
-        var text = PlayerPrefs.GetString("Game1");
+        var text = PlayerPrefs.GetString(gameName);
         Debug.Log("Loading Game: " + text);
         _gameData = JsonUtility.FromJson<GameData>(text);
 
