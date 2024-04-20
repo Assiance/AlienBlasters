@@ -1523,6 +1523,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1167873238936783935, guid: 06dac764699c1c14aa91963572770f01, type: 3}
+      propertyPath: _brickParticles
+      value: 
+      objectReference: {fileID: 751051474248658850, guid: 59763570b9a84224e9adcbc8090329bb, type: 3}
     - target: {fileID: 3930204226888567861, guid: 06dac764699c1c14aa91963572770f01, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -1962,6 +1966,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1514900165}
     m_Modifications:
+    - target: {fileID: 2177121576268508566, guid: 2f16a5f636e113744b7d889a42c707f8, type: 3}
+      propertyPath: _speed
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3117834729036104014, guid: 2f16a5f636e113744b7d889a42c707f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.5
