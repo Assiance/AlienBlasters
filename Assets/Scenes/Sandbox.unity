@@ -397,11 +397,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de591a597f7e0294ba9ec000b12fd49c, type: 3}
---- !u!120 &715879246 stripped
-LineRenderer:
-  m_CorrespondingSourceObject: {fileID: 2927239291544742051, guid: 0cb9202a8962df440b536c3eda05a84c, type: 3}
+--- !u!1 &715879245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8485981154592057785, guid: 0cb9202a8962df440b536c3eda05a84c, type: 3}
   m_PrefabInstance: {fileID: 1868985633424962531}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &715879249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715879245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9271115a39c67624b95fd98788adef6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &810457089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3117834729036104014, guid: 2f16a5f636e113744b7d889a42c707f8, type: 3}
@@ -1758,7 +1770,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8485981154592057785, guid: 0cb9202a8962df440b536c3eda05a84c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 715879249}
   m_SourcePrefab: {fileID: 100100000, guid: 0cb9202a8962df440b536c3eda05a84c, type: 3}
 --- !u!4 &2158256655234091778 stripped
 Transform:
@@ -2311,11 +2326,27 @@ PrefabInstance:
     - target: {fileID: 3200766645776461871, guid: 851b3d6d9ff39d9449726507b12097f8, type: 3}
       propertyPath: _on.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 715879246}
+      objectReference: {fileID: 715879249}
     - target: {fileID: 3200766645776461871, guid: 851b3d6d9ff39d9449726507b12097f8, type: 3}
       propertyPath: _off.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 715879246}
+      objectReference: {fileID: 715879249}
+    - target: {fileID: 3200766645776461871, guid: 851b3d6d9ff39d9449726507b12097f8, type: 3}
+      propertyPath: _on.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3200766645776461871, guid: 851b3d6d9ff39d9449726507b12097f8, type: 3}
+      propertyPath: _off.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Toggle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3200766645776461871, guid: 851b3d6d9ff39d9449726507b12097f8, type: 3}
+      propertyPath: _on.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Laser, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3200766645776461871, guid: 851b3d6d9ff39d9449726507b12097f8, type: 3}
+      propertyPath: _off.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Laser, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
