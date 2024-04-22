@@ -143,3 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43833b76037ab64dbd58df371b4c58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _brickParticles: {fileID: 751051474248658850, guid: 59763570b9a84224e9adcbc8090329bb, type: 3}
+  _laserDestructionTime: 1
