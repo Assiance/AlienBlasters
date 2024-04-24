@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Brick : MonoBehaviour
@@ -9,6 +6,13 @@ public class Brick : MonoBehaviour
     [SerializeField] float _laserDestructionTime = 1f;
 
     float _takenDamageTime;
+    SpriteRenderer _spriteRenderer;
+    float _resetColorTime;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -29,10 +33,22 @@ public class Brick : MonoBehaviour
 
     public void TakeLaserDamage()
     {
+        _spriteRenderer.color = Color.red;
+        _resetColorTime = Time.time + 0.1f;
+
         _takenDamageTime += Time.deltaTime;
         if (_takenDamageTime >= _laserDestructionTime)
         {
             Explode();
+        }
+    }
+
+    void Update()
+    {
+        if (_resetColorTime > 0 && Time.time >= _resetColorTime)
+        {
+            _resetColorTime = 0;
+            _spriteRenderer.color = Color.white;
         }
     }
 
