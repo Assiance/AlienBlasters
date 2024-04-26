@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ladybug : MonoBehaviour
@@ -15,6 +16,14 @@ public class Ladybug : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<Collider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    void OnDrawGizmos()
+    {
+        var offset = _direction * GetComponent<Collider2D>().bounds.extents.x;
+        var origin = (Vector2)transform.position + offset;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(origin, origin + _direction * _raycastDistance);
     }
 
     // Update is called once per frame

@@ -2680,7 +2680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4987519568455486568, guid: 20615a4742aa17c46bacb892d9bd75f6, type: 3}
       propertyPath: _raycastDistance
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
