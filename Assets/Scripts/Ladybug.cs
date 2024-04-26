@@ -20,16 +20,31 @@ public class Ladybug : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        var offset = _direction * GetComponent<Collider2D>().bounds.extents.x;
+        var collider = GetComponent<Collider2D>();
+        var offset = _direction * collider.bounds.extents.x;
         var origin = (Vector2)transform.position + offset;
         Gizmos.color = Color.red;
         Gizmos.DrawLine(origin, origin + _direction * _raycastDistance);
+
+        var bounds = collider.bounds;
+
+        if (_direction == Vector2.left)
+        {
+            var bottomLeft = new Vector2(bounds.center.x - bounds.extents.x, bounds.center.y - bounds.extents.y);
+            Gizmos.DrawLine(bottomLeft, bottomLeft + (Vector2.down * _raycastDistance));
+        }
+        else
+        {
+            var bottomRight = new Vector2(bounds.center.x + bounds.extents.x, bounds.center.y - bounds.extents.y);
+            Gizmos.DrawLine(bottomRight, bottomRight + (Vector2.down * _raycastDistance));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        var offset = _direction * _collider.bounds.extents.x;
+        var bounds = _collider.bounds;
+        var offset = _direction * bounds.extents.x;
         var origin = (Vector2)transform.position + offset;
         var hits = Physics2D.RaycastAll(origin, _direction, _raycastDistance);
 
