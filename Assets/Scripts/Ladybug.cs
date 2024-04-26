@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ladybug : MonoBehaviour
@@ -26,28 +25,46 @@ public class Ladybug : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine(origin, origin + _direction * _raycastDistance);
 
-        var bounds = collider.bounds;
+        var downOrigin = GetDownRayPosition(collider);
 
-        if (_direction == Vector2.left)
-        {
-            var bottomLeft = new Vector2(bounds.center.x - bounds.extents.x, bounds.center.y - bounds.extents.y);
-            Gizmos.DrawLine(bottomLeft, bottomLeft + (Vector2.down * _raycastDistance));
-        }
-        else
-        {
-            var bottomRight = new Vector2(bounds.center.x + bounds.extents.x, bounds.center.y - bounds.extents.y);
-            Gizmos.DrawLine(bottomRight, bottomRight + (Vector2.down * _raycastDistance));
-        }
+        Gizmos.DrawLine(downOrigin, downOrigin + (Vector2.down * _raycastDistance));
     }
 
-    // Update is called once per frame
+    Vector2 GetDownRayPosition(Collider2D collider)
+    {
+        var bounds = collider.bounds;
+        if (_direction == Vector2.left)
+            return new Vector2(bounds.center.x - bounds.extents.x, bounds.center.y - bounds.extents.y);
+        else
+            return new Vector2(bounds.center.x + bounds.extents.x, bounds.center.y - bounds.extents.y);
+    }
+
     void Update()
     {
-        var bounds = _collider.bounds;
-        var offset = _direction * bounds.extents.x;
+        var offset = _direction * _collider.bounds.extents.x;
         var origin = (Vector2)transform.position + offset;
-        var hits = Physics2D.RaycastAll(origin, _direction, _raycastDistance);
 
+        var canContinueWalking = false;
+        var downOrigin = GetDownRayPosition(_collider);
+        var downHits = Physics2D.RaycastAll(downOrigin, Vector2.down, _raycastDistance);
+
+        foreach (var hit in downHits)
+        {
+            if (hit.collider != null && hit.collider.gameObject != gameObject)
+            {
+                canContinueWalking = true;
+                break;
+            }
+        }
+
+        if (canContinueWalking == false)
+        {
+            _direction *= -1;
+            _spriteRenderer.flipX = _direction == Vector2.right;
+            return;
+        }
+
+        var hits = Physics2D.RaycastAll(origin, _direction, _raycastDistance);
         foreach (var hit in hits)
         {
             if (hit.collider != null && hit.collider.gameObject != gameObject)
