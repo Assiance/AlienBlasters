@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1630608903815067461}
   - component: {fileID: 4822435141897708640}
   - component: {fileID: 155648693317639527}
+  - component: {fileID: 793342922127296018}
   m_Layer: 0
   m_Name: Spring
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8728574969749515840}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.77, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1427548219357395384
 SpriteRenderer:
@@ -96,7 +97,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 8728574969749515840}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 7b5c15835a2ae174998b432b651371e9, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -241,3 +242,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &793342922127296018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8728574969749515840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be88cf2d07cae4438fca508b11d6f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onlyFromTop: 1
+  _bounciness: 400

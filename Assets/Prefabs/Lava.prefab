@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abd0ff4ddfeedf49bde7d72a73df74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ignoreFromTop: 0
 --- !u!60 &2350104238251145731
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -247,7 +248,7 @@ GameObject:
   - component: {fileID: 3655909768918179877}
   - component: {fileID: 960798628510023445}
   m_Layer: 0
-  m_Name: Grass Background (1)
+  m_Name: Grass Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
