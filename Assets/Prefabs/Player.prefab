@@ -201,7 +201,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   _footOffset: 0.35
-  _groundAcceleration: 10
+  _groundAcceleration: 25
   _snowAcceleration: 1
   _coinSfx: {fileID: 8300000, guid: 70340608f20b8264d8327faba82b98fa, type: 3}
   _hurtSfx: {fileID: 8300000, guid: f57e32d906b39be428d649b48f76abcb, type: 3}

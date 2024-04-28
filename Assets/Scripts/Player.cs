@@ -90,7 +90,21 @@ public class Player : MonoBehaviour
         var desiredHorizontal = horizontalInput * _maxHorizontalSpeed;
         var acceleration = IsOnSnow ? _snowAcceleration : _groundAcceleration;
 
-        _horizontal = Mathf.Lerp(_horizontal, desiredHorizontal, Time.deltaTime * acceleration);
+        //_horizontal = Mathf.Lerp(_horizontal, desiredHorizontal, Time.deltaTime * acceleration);
+
+        if (desiredHorizontal > _horizontal)
+        {
+            _horizontal += Time.deltaTime * acceleration;
+            if (_horizontal > desiredHorizontal)
+                _horizontal = desiredHorizontal;
+        }
+        else if (desiredHorizontal < _horizontal)
+        {
+            _horizontal -= Time.deltaTime * acceleration;
+            if (_horizontal < desiredHorizontal)
+                _horizontal = desiredHorizontal;
+        }
+
         _rb.velocity = new Vector2(_horizontal, vertical);
         UpdateSpriteAndAnimation();
     }
@@ -137,9 +151,9 @@ public class Player : MonoBehaviour
         _animator.SetBool("Move", _horizontal != 0);
 
         if (_horizontal > 0)
-            _spriteRenderer.flipX = false;
+            _animator.transform.rotation = Quaternion.identity;
         else if (_horizontal < 0)
-            _spriteRenderer.flipX = true;
+            _animator.transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
     public void AddPoint()
