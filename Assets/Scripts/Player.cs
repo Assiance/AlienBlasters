@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _audioSource = GetComponent<AudioSource>();
         _rb = GetComponent<Rigidbody2D>();
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
 
         _horizontal = Mathf.Lerp(_horizontal, desiredHorizontal, Time.deltaTime * acceleration);
         _rb.velocity = new Vector2(_horizontal, vertical);
-        UpdateSprite();
+        UpdateSpriteAndAnimation();
     }
 
     void UpdateGrounding()
@@ -131,10 +131,10 @@ public class Player : MonoBehaviour
             _jumpsRemaining = 2;
     }
 
-    void UpdateSprite()
+    void UpdateSpriteAndAnimation()
     {
-        _animator.SetBool("IsGrounded", IsGrounded);
-        _animator.SetFloat("HorizontalSpeed", Math.Abs(_horizontal));
+        _animator.SetBool("Jump", !IsGrounded);
+        _animator.SetBool("Move", _horizontal != 0);
 
         if (_horizontal > 0)
             _spriteRenderer.flipX = false;
