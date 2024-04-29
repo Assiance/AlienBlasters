@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class Blaster : MonoBehaviour
 {
     [SerializeField] GameObject _blasterShotPrefab;
+    [SerializeField] Transform _firePoint;
 
     PlayerInput _playerInput;
 
@@ -16,6 +17,6 @@ public class Blaster : MonoBehaviour
 
     void TryFire(InputAction.CallbackContext obj)
     {
-        Instantiate(_blasterShotPrefab, transform.position, Quaternion.identity);
+        Instantiate(_blasterShotPrefab, _firePoint.position, Quaternion.identity);
     }
 }

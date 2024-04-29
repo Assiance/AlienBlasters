@@ -88,6 +88,37 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!1 &1259288642959029602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3791318728010660577}
+  m_Layer: 0
+  m_Name: Fire Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3791318728010660577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259288642959029602}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.56, y: 0.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7682022326862384753}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2473566498774286451
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef14a2b3135eb24438c6d19475cb6f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blasterProjectile: {fileID: 4391780747385159325, guid: 812b6cdd514bbf94a8c39020f90f4194, type: 3}
+  _blasterShotPrefab: {fileID: 224761431327749646, guid: 7ecd34c699f6f7f46a4ea7b319a3a0ff, type: 3}
+  _firePoint: {fileID: 3791318728010660577}
 --- !u!1 &7251261852547728059
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,11 +751,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1776174814450263652, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3791318728010660577}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
 --- !u!4 &5281507824894965482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4283367920542834431, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
+  m_PrefabInstance: {fileID: 8230956207386208277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7682022326862384753 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1776174814450263652, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
   m_PrefabInstance: {fileID: 8230956207386208277}
   m_PrefabAsset: {fileID: 0}
