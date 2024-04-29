@@ -2739,10 +2739,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6695311601653773302, guid: 2d307ac974dc91b458408d2a137260ff, type: 3}
-      propertyPath: _blasterShotPrefab
-      value: 
-      objectReference: {fileID: 4955502633045071458, guid: 7ecd34c699f6f7f46a4ea7b319a3a0ff, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
