@@ -54,6 +54,11 @@ public class Ladybug : MonoBehaviour, ITakeLaserDamage
         _rigidbody.velocity = Vector2.zero;
     }
 
+    public void TakeDamage()
+    {
+        gameObject.SetActive(false);
+    }
+
     void CheckInFront()
     {
         var offset = _direction * _collider.bounds.extents.x;

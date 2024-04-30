@@ -30,6 +30,19 @@ public class BlasterShot : MonoBehaviour
         {
             dog.TakeDamage();
         }
+
+        var ladyBug = collision.gameObject.GetComponent<Ladybug>();
+        if (ladyBug != null)
+        {
+            ladyBug.TakeDamage();
+        }
+
+        var brick = collision.gameObject.GetComponent<Brick>();
+        if (brick != null)
+        {
+            brick.TakeDamage();
+        }
+        
         gameObject.SetActive(false);
     }
 }

@@ -4,6 +4,7 @@ public class Brick : MonoBehaviour, ITakeLaserDamage
 {
     [SerializeField] ParticleSystem _brickParticles;
     [SerializeField] float _laserDestructionTime = 1f;
+    [SerializeField] int _shotsToDestroy = 3;
 
     float _takenDamageTime;
     SpriteRenderer _spriteRenderer;
@@ -56,5 +57,14 @@ public class Brick : MonoBehaviour, ITakeLaserDamage
     {
         Instantiate(_brickParticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    public void TakeDamage()
+    {
+        _takenDamageTime += _laserDestructionTime / _shotsToDestroy;
+        if (_takenDamageTime >= _laserDestructionTime)
+        {
+            Explode();
+        }
     }
 }
