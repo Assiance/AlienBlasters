@@ -8,4 +8,9 @@ public class Dog : MonoBehaviour
     {
         Debug.Log("Dog shoots");
     }
+
+    public void TakeDamage()
+    {
+        gameObject.SetActive(false);
+    }
 }

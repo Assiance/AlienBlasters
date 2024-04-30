@@ -1187,10 +1187,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dog
       objectReference: {fileID: 0}
-    - target: {fileID: 3078785566639965637, guid: 2a2a900fc78cc704e938ae2fb6833f63, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7197896711716325537, guid: 2a2a900fc78cc704e938ae2fb6833f63, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7
