@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BlasterShot : MonoBehaviour
 {
-    [SerializeField] private float _speed = 8f;
+    [SerializeField] float _speed = 8f;
+    [SerializeField] GameObject _impactExplosion;
     
     Rigidbody2D _rb;
     Vector2 _direction = Vector2.right;
@@ -31,6 +32,9 @@ public class BlasterShot : MonoBehaviour
             damageable.TakeDamage();
         }
 
+        var explosion = Instantiate(_impactExplosion, collision.contacts[0].point, Quaternion.identity);
+        Destroy(explosion, 0.8f);
+        
         gameObject.SetActive(false);
     }
 }
