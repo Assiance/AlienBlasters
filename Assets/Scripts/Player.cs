@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -48,6 +49,16 @@ public class Player : MonoBehaviour
         _playerInput = GetComponent<PlayerInput>();
 
         FindObjectOfType<PlayerCanvas>().Bind(this);
+    }
+
+    void OnEnable()
+    {
+        FindObjectOfType<CinemachineTargetGroup>()?.AddMember(transform, 1f, 1f);
+    }
+
+    void OnDisable()
+    {
+        FindObjectOfType<CinemachineTargetGroup>()?.RemoveMember(transform);
     }
 
     void OnDrawGizmos()
