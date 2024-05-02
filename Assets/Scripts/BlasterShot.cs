@@ -4,6 +4,7 @@ public class BlasterShot : MonoBehaviour
 {
     [SerializeField] float _speed = 8f;
     [SerializeField] GameObject _impactExplosion;
+    [SerializeField] float _maxLifetime = 4f;
     
     Rigidbody2D _rb;
     Vector2 _direction = Vector2.right;
@@ -11,6 +12,7 @@ public class BlasterShot : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        Destroy(gameObject, _maxLifetime);
     }
 
     void Update()
@@ -35,6 +37,7 @@ public class BlasterShot : MonoBehaviour
         var explosion = Instantiate(_impactExplosion, collision.contacts[0].point, Quaternion.identity);
         Destroy(explosion, 0.8f);
         
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 }

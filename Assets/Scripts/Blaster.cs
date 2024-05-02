@@ -14,12 +14,21 @@ public class Blaster : MonoBehaviour
     {
         _player = GetComponent<Player>();
         _playerInput = GetComponent<PlayerInput>();
-        _playerInput.actions["Fire"].performed += TryFire;
+        //_playerInput.actions["Fire"].performed += TryFire;
     }
 
     void TryFire(InputAction.CallbackContext obj)
     {
         var shot = Instantiate(_blasterShotPrefab, _firePoint.position, Quaternion.identity);
         shot.Launch(_player.Direction);
+    }
+
+    void Update()
+    {
+        if (_playerInput.actions["Fire"].ReadValue<float>() > 0)
+        {
+            var shot = Instantiate(_blasterShotPrefab, _firePoint.position, Quaternion.identity);
+            shot.Launch(_player.Direction);
+        }
     }
 }
