@@ -48,9 +48,8 @@ public class BlasterShot : MonoBehaviour
             damageable.TakeDamage();
         }
 
-        var explosion = Instantiate(_impactExplosion, collision.contacts[0].point, Quaternion.identity);
-        Destroy(explosion, 0.8f);
-        
+        PoolManager.Instance.GetBlasterExplosion(collision.contacts[0].point);
+
         SelfDestruct();
     }
 
