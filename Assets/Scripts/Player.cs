@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] AudioClip _coinSfx;
     [SerializeField] AudioClip _hurtSfx;
     [SerializeField] float _knockbackVelocity = 400;
+    [SerializeField] Collider2D _duckingCollider;
+    [SerializeField] Collider2D _standingCollider;
 
     public bool IsGrounded;
     public bool IsOnSnow;
@@ -107,8 +109,13 @@ public class Player : MonoBehaviour
         //_horizontal = Mathf.Lerp(_horizontal, desiredHorizontal, Time.deltaTime * acceleration);
 
         _animator.SetBool("Duck", verticalInput < 0);
-        if (_animator.GetBool("IsDucking"))
+
+        var isDucking = _animator.GetBool("IsDucking");
+        if (isDucking)
             desiredHorizontal = 0;
+
+        _duckingCollider.enabled = isDucking;
+        _standingCollider.enabled = !isDucking;
 
         if (desiredHorizontal > _horizontal)
         {
