@@ -83,7 +83,9 @@ public class Player : MonoBehaviour
     {
         UpdateGrounding();
 
-        var horizontalInput = _playerInput.actions["Move"].ReadValue<Vector2>().x;
+        var input = _playerInput.actions["Move"].ReadValue<Vector2>();
+        var horizontalInput = input.x;
+        var verticalInput = input.y;
 
         var vertical = _rb.velocity.y;
 
@@ -103,6 +105,10 @@ public class Player : MonoBehaviour
         var acceleration = IsOnSnow ? _snowAcceleration : _groundAcceleration;
 
         //_horizontal = Mathf.Lerp(_horizontal, desiredHorizontal, Time.deltaTime * acceleration);
+
+        _animator.SetBool("Duck", verticalInput < 0);
+        if (verticalInput < 0)
+            desiredHorizontal = 0;
 
         if (desiredHorizontal > _horizontal)
         {
