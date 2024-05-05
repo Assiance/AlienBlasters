@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
 
         //_horizontal = Mathf.Lerp(_horizontal, desiredHorizontal, Time.deltaTime * acceleration);
 
-        _animator.SetBool("Duck", verticalInput < 0);
+        _animator.SetBool("Duck", verticalInput < 0 && Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput));
 
         var isDucking = _animator.GetBool("IsDucking");
         if (isDucking)

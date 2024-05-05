@@ -163,12 +163,12 @@ GameObject:
   - component: {fileID: 6204317893803735986}
   - component: {fileID: 1861990462602131748}
   - component: {fileID: 7340804842510166270}
+  - component: {fileID: 1488885196439458820}
   - component: {fileID: 5389884428379123376}
   - component: {fileID: 4322057153767695924}
   - component: {fileID: 954109675143567453}
   - component: {fileID: 5068417351493201225}
   - component: {fileID: 5125158154409837159}
-  - component: {fileID: 6695311601653773302}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -275,6 +275,19 @@ MonoBehaviour:
   ItemPoint: {fileID: 9044944769259250220}
   IsGrounded: 0
   IsOnSnow: 0
+--- !u!114 &1488885196439458820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2473566498774286451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b1db1b3ed202e4c942ceffeb35554b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemPoint: {fileID: 9044944769259250220}
 --- !u!50 &5389884428379123376
 Rigidbody2D:
   serializedVersion: 4
@@ -498,19 +511,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 661857049938763774}
---- !u!114 &6695311601653773302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2473566498774286451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef14a2b3135eb24438c6d19475cb6f2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _firePoint: {fileID: 3791318728010660577}
 --- !u!1 &5714294910165169005
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,13 +850,34 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1776174814450263652, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3791318728010660577}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1582240137606865927, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8383444067821931902}
   m_SourcePrefab: {fileID: 100100000, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
 --- !u!4 &5281507824894965482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4283367920542834431, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
   m_PrefabInstance: {fileID: 8230956207386208277}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7480201947088227346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1582240137606865927, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
+  m_PrefabInstance: {fileID: 8230956207386208277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8383444067821931902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480201947088227346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef14a2b3135eb24438c6d19475cb6f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firePoint: {fileID: 3791318728010660577}
 --- !u!4 &7682022326862384753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1776174814450263652, guid: 691aa0bbcaf112744846774c2a8b4e6b, type: 3}
