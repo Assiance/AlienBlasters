@@ -10,17 +10,14 @@ public class Key : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        var player = other.GetComponent<Player>();
-        if (player)
+        var playerInventory = other.GetComponent<PlayerInventory>();
+        if (playerInventory)
         {
-            transform.SetParent(player.ItemPoint);
-            transform.localPosition = Vector3.zero;
-            var playerInput = player.GetComponent<PlayerInput>();
-            playerInput.actions["Fire"].performed += UseKey;
+            playerInventory.Pickup(this);
         }
     }
 
-    void UseKey(InputAction.CallbackContext context)
+    public void Use()
     {
         var hits = Physics2D.OverlapCircleAll(transform.position, _useRange);
         foreach (var hit in hits)
