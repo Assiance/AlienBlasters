@@ -17,4 +17,5 @@ public class Blaster : MonoBehaviour, IItem
         var shot = PoolManager.Instance.GetBlasterShot();
         shot.Launch(_player.Direction, _firePoint.position);
     }
+
 }
