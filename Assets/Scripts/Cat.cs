@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cat : MonoBehaviour
 {
-    [SerializeField] private GameObject _catBombPrefab;
+    [SerializeField] CatBomb _catBombPrefab;
     [SerializeField] Transform _firePoint;
 
 
@@ -15,7 +15,8 @@ public class Cat : MonoBehaviour
 
     void SpawnCatBomb()
     {
-        Instantiate(_catBombPrefab, _firePoint);
+        var catBomb = Instantiate(_catBombPrefab, _firePoint);
+        catBomb.Launch(Vector2.up + Vector2.left);
     }
 
     void Update()

@@ -745,6 +745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7197896711716325537}
+  - component: {fileID: 4730063355916898080}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Untagged
@@ -768,6 +769,20 @@ Transform:
   - {fileID: 3980898394692363129}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4730063355916898080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3024491656241609522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 106e8885d8dc5474889f1fa5fbb30a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _catBombPrefab: {fileID: 4690886117279366490, guid: c2d2dc5bcd182d94490c88b1896807fa, type: 3}
+  _firePoint: {fileID: 9219120089497966847}
 --- !u!1 &3075699859428243642
 GameObject:
   m_ObjectHideFlags: 0
