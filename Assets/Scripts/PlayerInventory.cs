@@ -48,7 +48,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void UseEquippedItem(InputAction.CallbackContext obj)
     {
-        if (EquippedItem != null)
+        if (EquippedItem != null && GameManager.CinematicPlaying == false)
             EquippedItem.Use();
     }
 

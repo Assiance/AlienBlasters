@@ -1,5 +1,5 @@
-using System;
 using Cinemachine;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     AudioSource _audioSource;
     Rigidbody2D _rb;
     PlayerInput _playerInput;
-    
+
     float _horizontal;
     int _jumpsRemaining;
     float _jumpEndTime;
@@ -87,6 +87,17 @@ public class Player : MonoBehaviour
     {
         UpdateGrounding();
 
+        if (GameManager.CinematicPlaying == false)
+        {
+            UpdateMovement();
+        }
+
+        UpdateAnimation();
+        UpdateDirection();
+    }
+
+    private void UpdateMovement()
+    {
         var input = _playerInput.actions["Move"].ReadValue<Vector2>();
         var horizontalInput = input.x;
         var verticalInput = input.y;
@@ -133,8 +144,6 @@ public class Player : MonoBehaviour
         }
 
         _rb.velocity = new Vector2(_horizontal, vertical);
-        UpdateAnimation();
-        UpdateDirection();
     }
 
     void UpdateGrounding()
