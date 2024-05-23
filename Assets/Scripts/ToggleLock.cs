@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class ToggleLock : MonoBehaviour
 {
+    [SerializeField] UnityEvent OnUnlock;
+    
     SpriteRenderer _spriteRenderer;
     bool _unlocked;
 
@@ -19,5 +20,8 @@ public class ToggleLock : MonoBehaviour
     {
         _unlocked = !_unlocked;
         _spriteRenderer.color = _unlocked ? Color.white : Color.gray;
+
+        if (_unlocked)
+            OnUnlock?.Invoke();
     }
 }
