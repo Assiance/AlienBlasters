@@ -30,6 +30,8 @@ public class BeeEncounter : MonoBehaviour
     
     IEnumerator StartEncounter()
     {
+        _activeLightnings = new List<Transform>();
+
         foreach (var lightning in _lightnings)
         {
             lightning.gameObject.SetActive(false);
@@ -47,7 +49,7 @@ public class BeeEncounter : MonoBehaviour
         }
     }
 
-    private object SpawnNewLightning()
+    private IEnumerator SpawnNewLightning()
     {
         int index = Random.Range(0, _lightnings.Count);
         var currentLightning = _lightnings[index];
@@ -61,7 +63,7 @@ public class BeeEncounter : MonoBehaviour
         StartCoroutine(ShowLightning(currentLightning));
         _activeLightnings.Add(currentLightning);
 
-        return new WaitForSeconds(_delayBetweenStrikes);
+        yield return new WaitForSeconds(_delayBetweenStrikes);
     }
 
     private IEnumerator ShowLightning(Transform currentLightning)
