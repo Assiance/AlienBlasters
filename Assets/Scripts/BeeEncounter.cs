@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BeeEncounter : MonoBehaviour
@@ -8,10 +9,13 @@ public class BeeEncounter : MonoBehaviour
     [SerializeField] float _delayBeforeDamage = 1.5f;
     [SerializeField] float _lightningAnimationTime = 2f;
     [SerializeField] float _delayBetweenLightning = 1f;
+    [SerializeField] float _delayBetweenStrikes = 0.25f;
     [SerializeField] float _lightningRadius = 1f;
     [SerializeField] LayerMask _playerLayer;
+    [SerializeField] int _numberOfLightnings = 1;
 
     Collider2D[] _playerHitResults =  new Collider2D[10];
+    List<Transform> _activeLightnings;
 
     void OnValidate()
     {
@@ -26,25 +30,50 @@ public class BeeEncounter : MonoBehaviour
     
     IEnumerator StartEncounter()
     {
+        foreach (var lightning in _lightnings)
+        {
+            lightning.gameObject.SetActive(false);
+        }
+
         while (true)
         {
-            foreach (var lightning in _lightnings)
+            for (int i = 0; i < _numberOfLightnings; i++)
             {
-                lightning.gameObject.SetActive(false);
+                yield return SpawnNewLightning();
             }
 
-            yield return null;
-
-            int index = Random.Range(0, _lightnings.Count);
-            _lightnings[index].gameObject.SetActive(true);
-            yield return new WaitForSeconds(_delayBeforeDamage);
-
-            DamagePlayersInRange(_lightnings[index]);
-            yield return new WaitForSeconds(_lightningAnimationTime - _delayBeforeDamage);
-            
-            _lightnings[index].gameObject.SetActive(false);
-            yield return new WaitForSeconds(_delayBetweenLightning);
+            yield return new WaitUntil(() => _activeLightnings.All(t => t.gameObject.activeSelf == false));
+            _activeLightnings.Clear();
         }
+    }
+
+    private object SpawnNewLightning()
+    {
+        int index = Random.Range(0, _lightnings.Count);
+        var currentLightning = _lightnings[index];
+
+        while (_activeLightnings.Contains(currentLightning))
+        {
+            index = Random.Range(0, _lightnings.Count);
+            currentLightning = _lightnings[index];
+        }
+
+        StartCoroutine(ShowLightning(currentLightning));
+        _activeLightnings.Add(currentLightning);
+
+        return new WaitForSeconds(_delayBetweenStrikes);
+    }
+
+    private IEnumerator ShowLightning(Transform currentLightning)
+    {
+        currentLightning.gameObject.SetActive(true);
+        yield return new WaitForSeconds(_delayBeforeDamage);
+
+        DamagePlayersInRange(currentLightning);
+        yield return new WaitForSeconds(_lightningAnimationTime - _delayBeforeDamage);
+
+        currentLightning.gameObject.SetActive(false);
+        yield return new WaitForSeconds(_delayBetweenLightning);
     }
 
     void DamagePlayersInRange(Transform lightning)
