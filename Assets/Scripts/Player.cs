@@ -19,11 +19,14 @@ public class Player : MonoBehaviour
     [SerializeField] float _knockbackVelocity = 400;
     [SerializeField] Collider2D _duckingCollider;
     [SerializeField] Collider2D _standingCollider;
+    [SerializeField] float _wallDetectionDistance = 0.5f;
+    [SerializeField] int pointCount = 5;
 
     public Transform ItemPoint;
 
     public bool IsGrounded;
     public bool IsOnSnow;
+    public bool IsDucking;
 
     PlayerData _playerData = new PlayerData();
 
@@ -81,6 +84,24 @@ public class Player : MonoBehaviour
         // Draw Right Foot
         origin = new Vector2(transform.position.x + _footOffset, transform.position.y - spriteRenderer.bounds.extents.y);
         Gizmos.DrawLine(origin, origin + Vector2.down * 0.1f);
+
+        DrawGizmosForSide(Vector2.left, pointCount);
+        DrawGizmosForSide(Vector2.right, pointCount);
+    }
+
+    void DrawGizmosForSide(Vector2 direction, int numberOfPoints)
+    {
+        var activeCollider = IsDucking ? _duckingCollider : _standingCollider;
+        float colliderHeight = activeCollider.bounds.size.y;
+        float segmentSize = colliderHeight / (float)numberOfPoints;
+
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            var origin = transform.position - new Vector3(0, colliderHeight / 2f, 0);
+            origin += new Vector3(0, i * segmentSize, 0);
+            origin += (Vector3)direction * _wallDetectionDistance;
+            Gizmos.DrawWireSphere(origin, 0.05f);
+        }
     }
 
     // Update is called once per frame
@@ -124,12 +145,12 @@ public class Player : MonoBehaviour
 
         _animator.SetBool("Duck", verticalInput < 0 && Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput));
 
-        var isDucking = _animator.GetBool("IsDucking");
-        if (isDucking)
+        IsDucking = _animator.GetBool("IsDucking");
+        if (IsDucking)
             desiredHorizontal = 0;
 
-        _duckingCollider.enabled = isDucking;
-        _standingCollider.enabled = !isDucking;
+        _duckingCollider.enabled = IsDucking;
+        _standingCollider.enabled = !IsDucking;
 
         if (desiredHorizontal > _horizontal)
         {
@@ -146,6 +167,7 @@ public class Player : MonoBehaviour
 
         _rb.velocity = new Vector2(_horizontal, vertical);
     }
+
 
     void UpdateGrounding()
     {
