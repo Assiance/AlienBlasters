@@ -5259,7 +5259,13 @@ MonoBehaviour:
   - {fileID: 891597256}
   - {fileID: 1554066996}
   - {fileID: 735396324}
+  _delayBeforeDamage: 1.5
+  _lightningAnimationTime: 2
   _delayBetweenLightning: 2.5
+  _lightningRadius: 1
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &2127185718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2158256655246973329, guid: 4e3a117c069b4cb4aaa6a24788ef75b4, type: 3}
