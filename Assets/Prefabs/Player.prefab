@@ -273,11 +273,12 @@ MonoBehaviour:
   _duckingCollider: {fileID: 954109675143567453}
   _standingCollider: {fileID: 4322057153767695924}
   _wallDetectionDistance: 0.4
+  pointCount: 3
+  _buffer: 0.1
   ItemPoint: {fileID: 9044944769259250220}
   IsGrounded: 0
   IsOnSnow: 0
-  IsDucking: 1
-  pointCount: 3
+  IsDucking: 0
 --- !u!114 &1488885196439458820
 MonoBehaviour:
   m_ObjectHideFlags: 0
