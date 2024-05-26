@@ -4947,7 +4947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &2010213659
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -5262,10 +5262,12 @@ MonoBehaviour:
   _delayBeforeDamage: 1.5
   _lightningAnimationTime: 2
   _delayBetweenLightning: 2.5
+  _delayBetweenStrikes: 0.25
   _lightningRadius: 1
   _playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  _numberOfLightnings: 1
 --- !u!4 &2127185718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2158256655246973329, guid: 4e3a117c069b4cb4aaa6a24788ef75b4, type: 3}
