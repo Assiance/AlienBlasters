@@ -153,33 +153,36 @@ public class Player : MonoBehaviour
 
         // Check center
         Vector2 origin = new Vector2(transform.position.x, transform.position.y - _spriteRenderer.bounds.extents.y);
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, 0.1f, _layerMask);
-        if (hit.collider)
-        {
-            IsGrounded = true;
-            IsOnSnow = hit.collider.CompareTag("Snow");
-        }
+        CheckGrounding(origin);
 
         // Check left
         origin = new Vector2(transform.position.x - _footOffset, transform.position.y - _spriteRenderer.bounds.extents.y);
-        hit = Physics2D.Raycast(origin, Vector2.down, 0.1f, _layerMask);
-        if (hit.collider)
-        {
-            IsGrounded = true;
-            IsOnSnow = hit.collider.CompareTag("Snow");
-        }
+        CheckGrounding(origin);
 
         // Check right
         origin = new Vector2(transform.position.x + _footOffset, transform.position.y - _spriteRenderer.bounds.extents.y);
-        hit = Physics2D.Raycast(origin, Vector2.down, 0.1f, _layerMask);
-        if (hit.collider)
-        {
-            IsGrounded = true;
-            IsOnSnow = hit.collider.CompareTag("Snow");
-        }
+        CheckGrounding(origin);
 
         if (IsGrounded && GetComponent<Rigidbody2D>().velocity.y <= 0)
             _jumpsRemaining = 2;
+    }
+
+    private void CheckGrounding(Vector2 origin)
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, Vector2.down, 0.1f, _layerMask);
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider == null)
+                continue;
+
+            if (hit.collider.isTrigger && hit.collider.GetComponent<Water>() == null)
+                continue;
+
+            IsGrounded = true;
+            IsOnSnow = IsOnSnow || hit.collider.CompareTag("Snow") ;
+            Debug.Log($"Touching {hit.collider}", hit.collider.gameObject);
+        }
     }
 
     void UpdateAnimation()
