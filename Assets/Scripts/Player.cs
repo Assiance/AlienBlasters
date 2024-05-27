@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] Collider2D _duckingCollider;
     [SerializeField] Collider2D _standingCollider;
     [SerializeField] float _wallDetectionDistance = 0.5f;
-    [SerializeField] int pointCount = 5;
+    [SerializeField] int _wallCheckPoints = 5;
     [SerializeField] float _buffer = 0.1f;
 
     public Transform ItemPoint;
@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     public bool IsGrounded;
     public bool IsOnSnow;
     public bool IsDucking;
+    public bool IsTouchingRightWall;
+    public bool IsTouchingLeftWall;
 
     PlayerData _playerData = new PlayerData();
 
@@ -86,29 +88,54 @@ public class Player : MonoBehaviour
         origin = new Vector2(transform.position.x + _footOffset, transform.position.y - spriteRenderer.bounds.extents.y);
         Gizmos.DrawLine(origin, origin + Vector2.down * 0.1f);
 
-        DrawGizmosForSide(Vector2.left, pointCount, _buffer);
-        DrawGizmosForSide(Vector2.right, pointCount, _buffer);
+        DrawGizmosForSide(Vector2.left);
+        DrawGizmosForSide(Vector2.right);
     }
 
-    void DrawGizmosForSide(Vector2 direction, int numberOfPoints, float buffer)
+    void DrawGizmosForSide(Vector2 direction)
     {
         var activeCollider = IsDucking ? _duckingCollider : _standingCollider;
-        float colliderHeight = activeCollider.bounds.size.y - 2 * buffer;
-        float segmentSize = colliderHeight / (float)(numberOfPoints - 1);
+        float colliderHeight = activeCollider.bounds.size.y - 2 * _buffer;
+        float segmentSize = colliderHeight / (float)(_wallCheckPoints - 1);
 
         Vector3 colliderOffset = activeCollider.offset;
 
-        for (int i = 0; i < numberOfPoints; i++)
+        for (int i = 0; i < _wallCheckPoints; i++)
         {
             // Calculate the starting point at the top of the collider
             var origin = transform.position + (Vector3)colliderOffset - new Vector3(0, activeCollider.bounds.size.y / 2f, 0);
             // Adjust the origin to include the buffer and distribute points evenly along the collider height
-            origin += new Vector3(0, buffer + i * segmentSize, 0);
+            origin += new Vector3(0, _buffer + i * segmentSize, 0);
             // Apply the direction and wall detection distance
             origin += (Vector3)direction * _wallDetectionDistance;
             // Draw the gizmo at the calculated position
             Gizmos.DrawWireSphere(origin, 0.05f);
         }
+    }
+    
+    bool CheckForWall(Vector2 direction)
+    {
+        var activeCollider = IsDucking ? _duckingCollider : _standingCollider;
+        float colliderHeight = activeCollider.bounds.size.y - 2 * _buffer;
+        float segmentSize = colliderHeight / (float)(_wallCheckPoints - 1);
+
+        Vector3 colliderOffset = activeCollider.offset;
+
+        for (int i = 0; i < _wallCheckPoints; i++)
+        {
+            // Calculate the starting point at the top of the collider
+            var origin = transform.position + (Vector3)colliderOffset - new Vector3(0, activeCollider.bounds.size.y / 2f, 0);
+            // Adjust the origin to include the buffer and distribute points evenly along the collider height
+            origin += new Vector3(0, _buffer + i * segmentSize, 0);
+            // Apply the direction and wall detection distance
+            origin += (Vector3)direction * _wallDetectionDistance;
+            // Draw the gizmo at the calculated position
+
+            if (Physics2D.Raycast(origin, direction, 0.1f))
+                return true;
+        }
+
+        return false;
     }
 
 
@@ -117,6 +144,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         UpdateGrounding();
+        UpdateWallTouching();
 
         if (GameManager.CinematicPlaying == false)
         {
@@ -125,6 +153,12 @@ public class Player : MonoBehaviour
 
         UpdateAnimation();
         UpdateDirection();
+    }
+
+    private void UpdateWallTouching()
+    {
+        IsTouchingRightWall = CheckForWall(Vector2.right);
+        IsTouchingLeftWall = CheckForWall(Vector2.left);
     }
 
     private void UpdateMovement()
