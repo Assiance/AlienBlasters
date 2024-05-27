@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
             Gizmos.DrawWireSphere(origin, 0.05f);
         }
     }
-    
+
     bool CheckForWall(Vector2 direction)
     {
         var activeCollider = IsDucking ? _duckingCollider : _standingCollider;
@@ -131,8 +131,23 @@ public class Player : MonoBehaviour
             origin += (Vector3)direction * _wallDetectionDistance;
             // Draw the gizmo at the calculated position
 
-            if (Physics2D.Raycast(origin, direction, 0.1f))
+            int hits = Physics2D.Raycast(origin,
+                direction,
+                new ContactFilter2D() { layerMask = _layerMask, useLayerMask = true, useTriggers = true, },
+                _results,
+                0.1f);
+
+            for (int j = 0; j < hits; j++)
+            {
+                var hit = _results[j];
+                if (hit.collider == null)
+                    continue;
+
+                if (hit.collider.isTrigger)
+                    continue;
+
                 return true;
+            }
         }
 
         return false;
@@ -208,6 +223,12 @@ public class Player : MonoBehaviour
                 _horizontal = desiredHorizontal;
         }
 
+        if (desiredHorizontal > 0 && IsTouchingRightWall)
+            _horizontal = 0;
+
+        if (desiredHorizontal < 0 && IsTouchingLeftWall)
+            _horizontal = 0;
+
         _rb.velocity = new Vector2(_horizontal, vertical);
     }
 
@@ -235,9 +256,9 @@ public class Player : MonoBehaviour
 
     private void CheckGrounding(Vector2 origin)
     {
-        int hits = Physics2D.Raycast(origin, 
+        int hits = Physics2D.Raycast(origin,
             Vector2.down,
-            new ContactFilter2D() { layerMask = _layerMask },
+            new ContactFilter2D() { layerMask = _layerMask, useLayerMask = true, useTriggers = true, },
             _results,
             0.1f);
 
@@ -251,7 +272,7 @@ public class Player : MonoBehaviour
                 continue;
 
             IsGrounded = true;
-            IsOnSnow = IsOnSnow || hit.collider.CompareTag("Snow") ;
+            IsOnSnow = IsOnSnow || hit.collider.CompareTag("Snow");
             //Debug.Log($"Touching {hit.collider}", hit.collider.gameObject);
         }
     }
