@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BeeEncounter : MonoBehaviour
+public class BeeEncounter : MonoBehaviour, ITakeDamage
 {
     [SerializeField] List<Transform> _lightnings;
     [SerializeField] float _delayBeforeDamage = 1.5f;
@@ -13,9 +13,11 @@ public class BeeEncounter : MonoBehaviour
     [SerializeField] float _lightningRadius = 1f;
     [SerializeField] LayerMask _playerLayer;
     [SerializeField] int _numberOfLightnings = 1;
+    [SerializeField] GameObject _bee;
 
     Collider2D[] _playerHitResults =  new Collider2D[10];
     List<Transform> _activeLightnings;
+    public int _health = 10;
 
     void OnValidate()
     {
@@ -92,5 +94,13 @@ public class BeeEncounter : MonoBehaviour
             var player = _playerHitResults[i].GetComponent<Player>();
             player?.TakeDamage(Vector3.zero);
         }
+    }
+
+    public void TakeDamage()
+    {
+        _health--;
+        
+        if (_health <= 0)
+            _bee.SetActive(false);
     }
 }

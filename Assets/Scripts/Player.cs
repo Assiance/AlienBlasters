@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
 
             int hits = Physics2D.Raycast(origin,
                 direction,
-                new ContactFilter2D() { layerMask = _layerMask, useLayerMask = true, useTriggers = true, },
+                new ContactFilter2D() { layerMask = _layerMask, useLayerMask = true, useTriggers = true },
                 _results,
                 0.1f);
 
