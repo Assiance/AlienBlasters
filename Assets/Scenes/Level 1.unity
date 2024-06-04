@@ -5268,6 +5268,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _numberOfLightnings: 1
+  _bee: {fileID: 1514799816}
+  _health: 5
 --- !u!4 &2127185718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2158256655246973329, guid: 4e3a117c069b4cb4aaa6a24788ef75b4, type: 3}
