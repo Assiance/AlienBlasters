@@ -825,11 +825,43 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5791883493739501213, guid: 913fef012eb822c4cbc350f26a8d7668, type: 3}
   m_PrefabInstance: {fileID: 6884663376003812383}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &246813825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3993915808771137776, guid: d181446a1e0845046854288e43eeb94f, type: 3}
+  m_PrefabInstance: {fileID: 1536313561}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &246813827 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 862320295505390836, guid: d181446a1e0845046854288e43eeb94f, type: 3}
   m_PrefabInstance: {fileID: 1536313561}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &246813831
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246813825}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1001 &258134889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4359,10 +4391,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8573271679874895889, guid: d181446a1e0845046854288e43eeb94f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3993915808771137776, guid: d181446a1e0845046854288e43eeb94f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 246813831}
   m_SourcePrefab: {fileID: 100100000, guid: d181446a1e0845046854288e43eeb94f, type: 3}
 --- !u!4 &1536313562 stripped
 Transform:
@@ -5383,6 +5419,7 @@ MonoBehaviour:
     m_Bits: 64
   _numberOfLightnings: 1
   _bee: {fileID: 1514799816}
+  _beeRigidBody: {fileID: 246813831}
   _beeAnimator: {fileID: 246813827}
   _beeDestinations:
   - {fileID: 1973898098}

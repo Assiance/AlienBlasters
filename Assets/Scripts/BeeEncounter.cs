@@ -14,6 +14,7 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     [SerializeField] LayerMask _playerLayer;
     [SerializeField] int _numberOfLightnings = 1;
     [SerializeField] GameObject _bee;
+    [SerializeField] Rigidbody2D _beeRigidBody;
     [SerializeField] Animator _beeAnimator;
     [SerializeField] Transform[] _beeDestinations;
     [SerializeField] float _minIdleTime = 1;
@@ -149,7 +150,11 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
         _health--;
 
         if (_health <= 0)
-            _bee.SetActive(false);
+        {
+            StopAllCoroutines();
+            _beeAnimator.SetBool("Dead", true);
+            _beeRigidBody.bodyType = RigidbodyType2D.Dynamic;
+        }
         else
             _beeAnimator.SetTrigger("Hit");
     }
