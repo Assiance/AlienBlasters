@@ -19,7 +19,6 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     Collider2D[] _playerHitResults = new Collider2D[10];
     List<Transform> _activeLightnings;
     public int _health = 10;
-    public int _destinationIndex;
 
     void OnValidate()
     {
@@ -35,19 +34,22 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
 
     IEnumerator StartMovement()
     {
+        var grabBag = new TransformGrabBag(_beeDestinations);
         while (true)
         {
-            var destination = _beeDestinations[_destinationIndex];
-            
-            while (Vector2.Distance(_bee.transform.position, destination.position) > 0.1f)
+            var destination = grabBag.Grab();
+            if (destination is null)
             {
-                _bee.transform.position = Vector2.MoveTowards(_bee.transform.position, destination.position, Time.deltaTime);
-                yield return null;
+                Debug.LogWarning("Destination is null. Aborting movement.");
+                yield break;
             }
 
-            _destinationIndex++;
-            if (_destinationIndex >= _beeDestinations.Length)
-                _destinationIndex = 0;
+            while (Vector2.Distance(_bee.transform.position, destination.position) > 0.1f)
+            {
+                _bee.transform.position =
+                    Vector2.MoveTowards(_bee.transform.position, destination.position, Time.deltaTime);
+                yield return null;
+            }
         }
     }
 
