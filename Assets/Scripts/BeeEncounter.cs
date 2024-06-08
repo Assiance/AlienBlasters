@@ -18,10 +18,13 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     [SerializeField] Transform[] _beeDestinations;
     [SerializeField] float _minIdleTime = 1;
     [SerializeField] float _maxIdleTime = 2;
+    [SerializeField] GameObject _beeLaser;
 
     Collider2D[] _playerHitResults = new Collider2D[10];
     List<Transform> _activeLightnings;
     public int _health = 10;
+    bool _shotStarted;
+    bool _shotFinished;
 
     void OnValidate()
     {
@@ -33,10 +36,15 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     {
         StartCoroutine(StartLightning());
         StartCoroutine(StartMovement());
+        
+        var shootAnimationWrapper = GetComponentInChildren<ShootAnimationWrapper>();
+        shootAnimationWrapper.OnShoot += () => _shotStarted = true;
+        shootAnimationWrapper.OnReload += () => _shotFinished = true;
     }
 
     IEnumerator StartMovement()
     {
+        _beeLaser.SetActive(false);
         var grabBag = new GrabBag<Transform>(_beeDestinations);
         while (true)
         {
@@ -54,9 +62,18 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
                     Vector2.MoveTowards(_bee.transform.position, destination.position, Time.deltaTime);
                 yield return null;
             }
-            
+
             _beeAnimator.SetBool("Move", false);
             yield return new WaitForSeconds(Random.Range(_minIdleTime, _maxIdleTime));
+            _beeAnimator.SetTrigger("Fire");
+
+            yield return new WaitUntil(() => _shotStarted);
+            _shotStarted = false;
+            _beeLaser.SetActive(true);
+
+            yield return new WaitUntil(() => _shotFinished);
+            _shotFinished = false;
+            _beeLaser.SetActive(false);
         }
     }
 
