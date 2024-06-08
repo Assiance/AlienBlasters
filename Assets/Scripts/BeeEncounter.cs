@@ -37,7 +37,7 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     {
         StartCoroutine(StartLightning());
         StartCoroutine(StartMovement());
-        
+
         var shootAnimationWrapper = GetComponentInChildren<ShootAnimationWrapper>();
         shootAnimationWrapper.OnShoot += () => _shotStarted = true;
         shootAnimationWrapper.OnReload += () => _shotFinished = true;
@@ -154,6 +154,11 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
             StopAllCoroutines();
             _beeAnimator.SetBool("Dead", true);
             _beeRigidBody.bodyType = RigidbodyType2D.Dynamic;
+
+            foreach (var collider in _bee.GetComponentsInChildren<Collider2D>())
+            {
+                collider.gameObject.layer = LayerMask.NameToLayer("Dead");
+            }
         }
         else
             _beeAnimator.SetTrigger("Hit");
