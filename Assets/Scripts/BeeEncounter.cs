@@ -14,10 +14,12 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     [SerializeField] LayerMask _playerLayer;
     [SerializeField] int _numberOfLightnings = 1;
     [SerializeField] GameObject _bee;
+    [SerializeField] Transform[] _beeDestinations;
 
-    Collider2D[] _playerHitResults =  new Collider2D[10];
+    Collider2D[] _playerHitResults = new Collider2D[10];
     List<Transform> _activeLightnings;
     public int _health = 10;
+    public int _destinationIndex;
 
     void OnValidate()
     {
@@ -27,10 +29,29 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
 
     void OnEnable()
     {
-        StartCoroutine(StartEncounter());
+        StartCoroutine(StartLightning());
+        StartCoroutine(StartMovement());
     }
-    
-    IEnumerator StartEncounter()
+
+    IEnumerator StartMovement()
+    {
+        while (true)
+        {
+            var destination = _beeDestinations[_destinationIndex];
+            
+            while (Vector2.Distance(_bee.transform.position, destination.position) > 0.1f)
+            {
+                _bee.transform.position = Vector2.MoveTowards(_bee.transform.position, destination.position, Time.deltaTime);
+                yield return null;
+            }
+
+            _destinationIndex++;
+            if (_destinationIndex >= _beeDestinations.Length)
+                _destinationIndex = 0;
+        }
+    }
+
+    IEnumerator StartLightning()
     {
         _activeLightnings = new List<Transform>();
 
@@ -88,7 +109,8 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
 
     void DamagePlayersInRange(Transform lightning)
     {
-        var hits = Physics2D.OverlapCircleNonAlloc(lightning.position, _lightningRadius, _playerHitResults, _playerLayer);
+        var hits = Physics2D.OverlapCircleNonAlloc(lightning.position, _lightningRadius, _playerHitResults,
+            _playerLayer);
         for (int i = 0; i < hits; i++)
         {
             var player = _playerHitResults[i].GetComponent<Player>();
@@ -99,7 +121,7 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     public void TakeDamage()
     {
         _health--;
-        
+
         if (_health <= 0)
             _bee.SetActive(false);
     }
