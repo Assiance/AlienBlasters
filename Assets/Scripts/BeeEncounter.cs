@@ -14,7 +14,10 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     [SerializeField] LayerMask _playerLayer;
     [SerializeField] int _numberOfLightnings = 1;
     [SerializeField] GameObject _bee;
+    [SerializeField] Animator _beeAnimator;
     [SerializeField] Transform[] _beeDestinations;
+    [SerializeField] float _minIdleTime = 1;
+    [SerializeField] float _maxIdleTime = 2;
 
     Collider2D[] _playerHitResults = new Collider2D[10];
     List<Transform> _activeLightnings;
@@ -44,12 +47,16 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
                 yield break;
             }
 
+            _beeAnimator.SetBool("Move", true);
             while (Vector2.Distance(_bee.transform.position, destination.position) > 0.1f)
             {
                 _bee.transform.position =
                     Vector2.MoveTowards(_bee.transform.position, destination.position, Time.deltaTime);
                 yield return null;
             }
+            
+            _beeAnimator.SetBool("Move", false);
+            yield return new WaitForSeconds(Random.Range(_minIdleTime, _maxIdleTime));
         }
     }
 

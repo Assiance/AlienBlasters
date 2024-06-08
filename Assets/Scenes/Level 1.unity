@@ -825,6 +825,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5791883493739501213, guid: 913fef012eb822c4cbc350f26a8d7668, type: 3}
   m_PrefabInstance: {fileID: 6884663376003812383}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &246813827 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 862320295505390836, guid: d181446a1e0845046854288e43eeb94f, type: 3}
+  m_PrefabInstance: {fileID: 1536313561}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &258134889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4231,7 +4236,7 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 7313855916313461534, guid: 94f846f2ec1d6ae43b4d36320b8d0a7b, type: 2}
-    value: {fileID: 1536313563}
+    value: {fileID: 0}
   - key: {fileID: -7455342582289891595, guid: 94f846f2ec1d6ae43b4d36320b8d0a7b, type: 2}
     value: {fileID: 2084265053}
   m_ExposedReferences:
@@ -4310,6 +4315,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2084265052}
     m_Modifications:
+    - target: {fileID: 862320295505390836, guid: d181446a1e0845046854288e43eeb94f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8c9182c154d7f8d4eb0495de4a2a70f4, type: 2}
     - target: {fileID: 3024491656241609522, guid: d181446a1e0845046854288e43eeb94f, type: 3}
       propertyPath: m_Name
       value: Bee Root
@@ -4357,37 +4366,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3024491656241609522, guid: d181446a1e0845046854288e43eeb94f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1536313563}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d181446a1e0845046854288e43eeb94f, type: 3}
 --- !u!4 &1536313562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7197896711716325537, guid: d181446a1e0845046854288e43eeb94f, type: 3}
   m_PrefabInstance: {fileID: 1536313561}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1536313563
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514799816}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1554066996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5791883493739501213, guid: 913fef012eb822c4cbc350f26a8d7668, type: 3}
@@ -5397,13 +5382,15 @@ MonoBehaviour:
     m_Bits: 64
   _numberOfLightnings: 1
   _bee: {fileID: 1514799816}
+  _beeAnimator: {fileID: 246813827}
   _beeDestinations:
   - {fileID: 1973898098}
   - {fileID: 1992348400}
   - {fileID: 308045487}
   - {fileID: 308912326}
+  _minIdleTime: 1
+  _maxIdleTime: 2
   _health: 10
-  _destinationIndex: 0
 --- !u!4 &2127185718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2158256655246973329, guid: 4e3a117c069b4cb4aaa6a24788ef75b4, type: 3}
