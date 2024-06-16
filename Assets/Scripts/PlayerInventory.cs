@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +28,12 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (var item in GetComponentsInChildren<IItem>())
             Pickup(item);
+    }
+
+    void OnDestroy()
+    {
+        _playerInput.actions["Fire"].performed -= UseEquippedItem;
+        _playerInput.actions["EquipNext"].performed -= EquipNext;
     }
 
     void EquipNext(InputAction.CallbackContext obj)
