@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public static bool CinematicPlaying { get; private set; }
-
+    public static bool IsLoading { get; private set; }
+    
     public List<string> AllGameNames = new List<string>();
 
     [SerializeField] GameData _gameData;
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
             _playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
         else
         {
+            _gameData.CurrentLevelName = arg0.name;
             _playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;
             var allPlayers = FindObjectsOfType<Player>();
             foreach (var player in allPlayers)
@@ -59,6 +61,12 @@ public class GameManager : MonoBehaviour
                 var playerInput = player.GetComponent<PlayerInput>();
                 var data = GetPlayerData(playerInput.playerIndex);
                 player.Bind(data);
+
+                if (GameManager.IsLoading)
+                {
+                    player.RestorePositionAndVelocity();
+                    IsLoading = false;
+                }
             }
             //SaveGame();
         }
@@ -67,6 +75,9 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
+        if (string.IsNullOrEmpty(_gameData.GameName))
+            _gameData.GameName = "Game " + AllGameNames.Count;
+            
         var text = JsonUtility.ToJson(_gameData);
         Debug.Log("Saving Game: " + text);
 
@@ -84,11 +95,15 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame(string gameName)
     {
+        IsLoading = true;
         var text = PlayerPrefs.GetString(gameName);
         Debug.Log("Loading Game: " + text);
         _gameData = JsonUtility.FromJson<GameData>(text);
 
-        SceneManager.LoadScene("Level 1");
+        if (string.IsNullOrWhiteSpace(_gameData.CurrentLevelName))
+            _gameData.CurrentLevelName = "Level 1";
+        
+        SceneManager.LoadScene(_gameData.CurrentLevelName);
     }
 
     void HandlePlayerJoined(PlayerInput playerInput)
