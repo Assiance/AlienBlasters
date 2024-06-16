@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BeeEncounter : MonoBehaviour, ITakeDamage
 {
@@ -20,10 +21,11 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     [SerializeField] float _minIdleTime = 1;
     [SerializeField] float _maxIdleTime = 2;
     [SerializeField] GameObject _beeLaser;
+    [SerializeField] int _maxHealth = 50;
 
     Collider2D[] _playerHitResults = new Collider2D[10];
     List<Transform> _activeLightnings;
-    public int _health = 10;
+    int _currentHealth;
     bool _shotStarted;
     bool _shotFinished;
 
@@ -35,6 +37,8 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
 
     void OnEnable()
     {
+        _currentHealth = _maxHealth;
+        
         StartCoroutine(StartLightning());
         StartCoroutine(StartMovement());
 
@@ -147,11 +151,16 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
 
     public void TakeDamage()
     {
-        _health--;
+        _currentHealth--;
 
-        if (_health <= 0)
+        if (_currentHealth == _maxHealth / 2)
+        {
+            StartCoroutine(ToggleFlood(true));
+        }
+        if (_currentHealth <= 0)
         {
             StopAllCoroutines();
+            StartCoroutine(ToggleFlood(false));
             _beeAnimator.SetBool("Dead", true);
             _beeRigidBody.bodyType = RigidbodyType2D.Dynamic;
 
@@ -162,5 +171,36 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
         }
         else
             _beeAnimator.SetTrigger("Hit");
+    }
+
+    IEnumerator ToggleFlood(bool enableFlood)
+    {
+        var targetWaterY = enableFlood ? _water.transform.position.y + 1 : _water.transform.position.y - 1;
+        _water.transform.position = new Vector3(_water.transform.position.x, targetWaterY, _water.transform.position.z);
+
+        yield return null;
+    }
+
+    public Water _water;
+    
+    [ContextMenu(nameof(HalfHealth))]
+    void HalfHealth()
+    {
+        _currentHealth = _maxHealth / 2;
+        _currentHealth++;
+        TakeDamage();
+    }
+    
+    [ContextMenu(nameof(Kill))]
+    void Kill()
+    {
+        _currentHealth = 1;
+        TakeDamage();
+    }
+    
+    [ContextMenu(nameof(FullHealth))]
+    void FullHealth()
+    {
+        _currentHealth = _maxHealth;
     }
 }
