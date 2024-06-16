@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    private AudioSource _audioSource;
+    AudioSource _audioSource;
+    BuoyancyEffector2D _buoyancyEffector2D;
 
     void Awake()
     {
+        _buoyancyEffector2D = GetComponent<BuoyancyEffector2D>();
         _audioSource = GetComponent<AudioSource>();
     }
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             _audioSource?.Play();
         }
+    }
+    
+    public void SetSpeed(float speed)
+    {
+        _buoyancyEffector2D.flowMagnitude = speed;
     }
 }

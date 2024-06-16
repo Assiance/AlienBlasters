@@ -195,6 +195,7 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
         }
         
         _floodGroundCollider.enabled = !enableFlood;
+        _water.SetSpeed(enableFlood ? 5f : 0f);
     }
 
     [ContextMenu(nameof(HalfHealth))]

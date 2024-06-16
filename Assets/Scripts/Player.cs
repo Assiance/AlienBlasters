@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] float _jumpDuration = 0.5f;
     [SerializeField] Sprite _jumpSprite;
     [SerializeField] LayerMask _layerMask;
+    [SerializeField] LayerMask _waterLayerMask;
     [SerializeField] float _footOffset = 0.5f;
     [SerializeField] float _groundAcceleration = 10;
     [SerializeField] float _snowAcceleration = 1;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     public Transform ItemPoint;
 
     public bool IsGrounded;
+    public bool IsInWater;
     public bool IsOnSnow;
     public bool IsDucking;
     public bool IsTouchingRightWall;
@@ -36,7 +38,12 @@ public class Player : MonoBehaviour
     public event Action OnCoinsChanged;
     public event Action OnHealthChanged;
 
-    public int Coins { get => _playerData.Coins; private set => _playerData.Coins = value; }
+    public int Coins
+    {
+        get => _playerData.Coins;
+        private set => _playerData.Coins = value;
+    }
+
     public int Health => _playerData.Health;
     public Vector2 Direction { get; private set; } = Vector2.right;
 
@@ -81,11 +88,13 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(origin, origin + Vector2.down * 0.1f);
 
         // Draw Left Foot
-        origin = new Vector2(transform.position.x - _footOffset, transform.position.y - spriteRenderer.bounds.extents.y);
+        origin = new Vector2(transform.position.x - _footOffset,
+            transform.position.y - spriteRenderer.bounds.extents.y);
         Gizmos.DrawLine(origin, origin + Vector2.down * 0.1f);
 
         // Draw Right Foot
-        origin = new Vector2(transform.position.x + _footOffset, transform.position.y - spriteRenderer.bounds.extents.y);
+        origin = new Vector2(transform.position.x + _footOffset,
+            transform.position.y - spriteRenderer.bounds.extents.y);
         Gizmos.DrawLine(origin, origin + Vector2.down * 0.1f);
 
         DrawGizmosForSide(Vector2.left);
@@ -103,7 +112,8 @@ public class Player : MonoBehaviour
         for (int i = 0; i < _wallCheckPoints; i++)
         {
             // Calculate the starting point at the top of the collider
-            var origin = transform.position + (Vector3)colliderOffset - new Vector3(0, activeCollider.bounds.size.y / 2f, 0);
+            var origin = transform.position + (Vector3)colliderOffset -
+                         new Vector3(0, activeCollider.bounds.size.y / 2f, 0);
             // Adjust the origin to include the buffer and distribute points evenly along the collider height
             origin += new Vector3(0, _buffer + i * segmentSize, 0);
             // Apply the direction and wall detection distance
@@ -124,7 +134,8 @@ public class Player : MonoBehaviour
         for (int i = 0; i < _wallCheckPoints; i++)
         {
             // Calculate the starting point at the top of the collider
-            var origin = transform.position + (Vector3)colliderOffset - new Vector3(0, activeCollider.bounds.size.y / 2f, 0);
+            var origin = transform.position + (Vector3)colliderOffset -
+                         new Vector3(0, activeCollider.bounds.size.y / 2f, 0);
             // Adjust the origin to include the buffer and distribute points evenly along the collider height
             origin += new Vector3(0, _buffer + i * segmentSize, 0);
             // Apply the direction and wall detection distance
@@ -152,7 +163,6 @@ public class Player : MonoBehaviour
 
         return false;
     }
-
 
 
     // Update is called once per frame
@@ -229,7 +239,10 @@ public class Player : MonoBehaviour
         if (desiredHorizontal < 0 && IsTouchingLeftWall)
             _horizontal = 0;
 
-        _rb.velocity = new Vector2(_horizontal, vertical);
+        if (IsInWater)
+            _rb.velocity = new Vector2(_rb.velocity.x, vertical);
+        else
+            _rb.velocity = new Vector2(_horizontal, vertical);
     }
 
 
@@ -237,20 +250,23 @@ public class Player : MonoBehaviour
     {
         IsGrounded = false;
         IsOnSnow = false;
+        IsInWater = false;
 
         // Check center
         Vector2 origin = new Vector2(transform.position.x, transform.position.y - _spriteRenderer.bounds.extents.y);
         CheckGrounding(origin);
 
         // Check left
-        origin = new Vector2(transform.position.x - _footOffset, transform.position.y - _spriteRenderer.bounds.extents.y);
+        origin = new Vector2(transform.position.x - _footOffset,
+            transform.position.y - _spriteRenderer.bounds.extents.y);
         CheckGrounding(origin);
 
         // Check right
-        origin = new Vector2(transform.position.x + _footOffset, transform.position.y - _spriteRenderer.bounds.extents.y);
+        origin = new Vector2(transform.position.x + _footOffset,
+            transform.position.y - _spriteRenderer.bounds.extents.y);
         CheckGrounding(origin);
 
-        if (IsGrounded && GetComponent<Rigidbody2D>().velocity.y <= 0)
+        if ((IsGrounded || IsInWater) && _rb.velocity.y <= 0)
             _jumpsRemaining = 2;
     }
 
@@ -268,13 +284,12 @@ public class Player : MonoBehaviour
             if (hit.collider == null)
                 continue;
 
-            if (hit.collider.isTrigger && hit.collider.GetComponent<Water>() == null)
-                continue;
-
             IsGrounded = true;
             IsOnSnow = IsOnSnow || hit.collider.CompareTag("Snow");
-            //Debug.Log($"Touching {hit.collider}", hit.collider.gameObject);
         }
+
+        var water = Physics2D.OverlapPoint(origin, _waterLayerMask);
+        IsInWater = water is not null;
     }
 
     void UpdateAnimation()
