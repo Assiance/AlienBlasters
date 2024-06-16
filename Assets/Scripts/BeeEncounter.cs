@@ -22,6 +22,8 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     [SerializeField] float _maxIdleTime = 2;
     [SerializeField] GameObject _beeLaser;
     [SerializeField] int _maxHealth = 50;
+    [SerializeField] Water _water;
+    [SerializeField] Collider2D _floodGroundCollider;
 
     Collider2D[] _playerHitResults = new Collider2D[10];
     List<Transform> _activeLightnings;
@@ -38,7 +40,7 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
     void OnEnable()
     {
         _currentHealth = _maxHealth;
-        
+
         StartCoroutine(StartLightning());
         StartCoroutine(StartMovement());
 
@@ -157,6 +159,7 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
         {
             StartCoroutine(ToggleFlood(true));
         }
+
         if (_currentHealth <= 0)
         {
             StopAllCoroutines();
@@ -175,14 +178,25 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
 
     IEnumerator ToggleFlood(bool enableFlood)
     {
-        var targetWaterY = enableFlood ? _water.transform.position.y + 1 : _water.transform.position.y - 1;
-        _water.transform.position = new Vector3(_water.transform.position.x, targetWaterY, _water.transform.position.z);
+        var initialWaterY = _water.transform.position.y;
+        var targetWaterY = enableFlood ? initialWaterY + 1 : initialWaterY - 1;
+        var duration = 1f;
+        var elapsedTime = 0f;
 
-        yield return null;
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            var progress = elapsedTime / duration;
+            var y = Mathf.Lerp(initialWaterY, targetWaterY, progress);
+            var destination = new Vector3(_water.transform.position.x, y, _water.transform.position.z);
+            _water.transform.position = destination;
+            
+            yield return null;
+        }
+        
+        _floodGroundCollider.enabled = !enableFlood;
     }
 
-    public Water _water;
-    
     [ContextMenu(nameof(HalfHealth))]
     void HalfHealth()
     {
@@ -190,14 +204,14 @@ public class BeeEncounter : MonoBehaviour, ITakeDamage
         _currentHealth++;
         TakeDamage();
     }
-    
+
     [ContextMenu(nameof(Kill))]
     void Kill()
     {
         _currentHealth = 1;
         TakeDamage();
     }
-    
+
     [ContextMenu(nameof(FullHealth))]
     void FullHealth()
     {
