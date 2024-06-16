@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 933496098979637436}
   - component: {fileID: 7380350730371569991}
   - component: {fileID: 5527461596520299834}
+  - component: {fileID: 968061773739782817}
   m_Layer: 4
   m_Name: Water Bottom
   m_TagString: Untagged
@@ -130,6 +131,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &968061773739782817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090839173071244356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7adf435bd35a427791eb33ce6bd6ae8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scrollSpeed: 1
 --- !u!1 &6818422912106289024
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +158,7 @@ GameObject:
   - component: {fileID: 3072683707998522663}
   - component: {fileID: 1989907405108507034}
   - component: {fileID: 5641925074080902903}
+  - component: {fileID: 4494315373038619061}
   m_Layer: 4
   m_Name: Water
   m_TagString: Untagged
@@ -399,6 +414,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4494315373038619061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818422912106289024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7adf435bd35a427791eb33ce6bd6ae8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scrollSpeed: 1
 --- !u!1 &6828166002859456161
 GameObject:
   m_ObjectHideFlags: 0

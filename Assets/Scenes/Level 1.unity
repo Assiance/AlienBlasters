@@ -1412,6 +1412,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.0299
       objectReference: {fileID: 0}
+    - target: {fileID: 968061773739782817, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
+      propertyPath: _scrollSpeed
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3362540447955824160, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1460,9 +1464,17 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 36.095596
       objectReference: {fileID: 0}
+    - target: {fileID: 4494315373038619061, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
+      propertyPath: _scrollSpeed
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5335564748501166999, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
       propertyPath: m_Size.x
       value: 36.095596
+      objectReference: {fileID: 0}
+    - target: {fileID: 5527461596520299834, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 36.059746
       objectReference: {fileID: 0}
     - target: {fileID: 6818422912106289024, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
       propertyPath: m_Name
@@ -5511,6 +5523,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1306267258}
     m_Modifications:
+    - target: {fileID: 968061773739782817, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
+      propertyPath: _scrollSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3362540447955824160, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -5553,6 +5569,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3362540447955824160, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494315373038619061, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
+      propertyPath: _scrollSpeed
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6818422912106289024, guid: 86eff663bbbd05644904bc1ff765ab24, type: 3}
@@ -6192,18 +6212,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3871811385083617166, guid: 7c114aec297fc084d87ba3b5e5a5641e, type: 3}
-      propertyPath: MaxDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3871811385083617166, guid: 7c114aec297fc084d87ba3b5e5a5641e, type: 3}
-      propertyPath: rolloffMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3871811385083617166, guid: 7c114aec297fc084d87ba3b5e5a5641e, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4743153695939237734, guid: 7c114aec297fc084d87ba3b5e5a5641e, type: 3}
       propertyPath: m_Name
       value: Frog
