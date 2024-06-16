@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void SaveGame()
+    public void SaveGame()
     {
         var text = JsonUtility.ToJson(_gameData);
         Debug.Log("Saving Game: " + text);
@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetString("AllGameNames", commaSeperatedGameNames);
         PlayerPrefs.Save();
     }
+
+    public void ReloadGame() => LoadGame(_gameData.GameName);
 
     public void LoadGame(string gameName)
     {
