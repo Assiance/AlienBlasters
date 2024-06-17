@@ -27,6 +27,7 @@ public class LevelData
 {
     public string LevelName;
     public List<CoinData> CoinDatas = new List<CoinData>();
+    public List<LaserData> LaserDatas = new List<LaserData>();
 }
 
 [Serializable]
@@ -34,4 +35,11 @@ public class CoinData
 {
     public string Name;
     public bool IsCollected;
+}
+
+[Serializable]
+public class LaserData
+{
+    public string Name;
+    public bool IsOn;
 }

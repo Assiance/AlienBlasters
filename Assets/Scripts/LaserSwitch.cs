@@ -10,11 +10,17 @@ public class LaserSwitch : MonoBehaviour
     [SerializeField] UnityEvent _off;
 
     SpriteRenderer _spriteRenderer;
-    bool _isOn;
+    LaserData _data;
 
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    
+    public void Bind(LaserData data)
+    {
+        _data = data;
+        UpdateSwitchState();
     }
 
     void OnTriggerStay2D(Collider2D collider)
@@ -35,22 +41,35 @@ public class LaserSwitch : MonoBehaviour
     }
     private void TurnOff()
     {
-        if (_isOn)
+        if (_data.IsOn)
         {
-            _isOn = false;
-            _off.Invoke();
-            _spriteRenderer.sprite = _left;
+            _data.IsOn = false;
+            UpdateSwitchState();
+            _data.IsOn = false;
         }
     }
 
     private void TurnOn()
     {
-        if (_isOn == false)
+        if (_data.IsOn == false)
         {
-            _isOn = true;
+            _data.IsOn = true;
+            UpdateSwitchState();
+            _data.IsOn = true;
+        }
+    }
+    
+    void UpdateSwitchState()
+    {
+        if (_data.IsOn)
+        {
             _on.Invoke();
             _spriteRenderer.sprite = _right;
         }
+        else
+        {
+            _off.Invoke();
+            _spriteRenderer.sprite = _left;
+        }
     }
-
 }

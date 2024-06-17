@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
                 _gameData.LevelDatas.Add(levelData);
             }
 
+            BindLasers(levelData);
             BindCoins(levelData);
 
             var allPlayers = FindObjectsOfType<Player>();
@@ -102,6 +103,26 @@ public class GameManager : MonoBehaviour
             }
 
             coin.Bind(data);
+        }
+    }
+
+    void BindLasers(LevelData levelData)
+    {
+        var allLasers = FindObjectsOfType<LaserSwitch>();
+        foreach (var laser in allLasers)
+        {
+            var data = levelData.LaserDatas.FirstOrDefault(l => l.Name == laser.name);
+            if (data == null)
+            {
+                data = new LaserData()
+                {
+                    IsOn = false,
+                    Name = laser.name
+                };
+                levelData.LaserDatas.Add(data);
+            }
+
+            laser.Bind(data);
         }
     }
 
