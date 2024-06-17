@@ -13,11 +13,11 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public static bool CinematicPlaying { get; private set; }
     public static bool IsLoading { get; private set; }
-    
+
     public List<string> AllGameNames = new List<string>();
 
     [SerializeField] GameData _gameData;
-    
+
     PlayerInputManager _playerInputManager;
 
     public void ToggleCinematic(bool cinematicPlaying)
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        _playerInputManager = GetComponent<PlayerInputManager>(); 
+        _playerInputManager = GetComponent<PlayerInputManager>();
         _playerInputManager.onPlayerJoined += HandlePlayerJoined;
 
         SceneManager.sceneLoaded += HandleSceneLoaded;
@@ -55,6 +55,19 @@ public class GameManager : MonoBehaviour
         {
             _gameData.CurrentLevelName = arg0.name;
             _playerInputManager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;
+
+            var levelData = _gameData.LevelDatas.FirstOrDefault(l => l.LevelName == arg0.name);
+            if (levelData == null)
+            {
+                levelData = new LevelData()
+                {
+                    LevelName = arg0.name
+                };
+                _gameData.LevelDatas.Add(levelData);
+            }
+
+            BindCoins(levelData);
+
             var allPlayers = FindObjectsOfType<Player>();
             foreach (var player in allPlayers)
             {
@@ -70,14 +83,33 @@ public class GameManager : MonoBehaviour
             }
             //SaveGame();
         }
+    }
 
+    void BindCoins(LevelData levelData)
+    {
+        var allCoins = FindObjectsOfType<Coin>();
+        foreach (var coin in allCoins)
+        {
+            var data = levelData.CoinDatas.FirstOrDefault(c => c.Name == coin.name);
+            if (data == null)
+            {
+                data = new CoinData()
+                {
+                    IsCollected = false,
+                    Name = coin.name
+                };
+                levelData.CoinDatas.Add(data);
+            }
+
+            coin.Bind(data);
+        }
     }
 
     public void SaveGame()
     {
         if (string.IsNullOrEmpty(_gameData.GameName))
             _gameData.GameName = "Game " + AllGameNames.Count;
-            
+
         var text = JsonUtility.ToJson(_gameData);
         Debug.Log("Saving Game: " + text);
 
@@ -102,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         if (string.IsNullOrWhiteSpace(_gameData.CurrentLevelName))
             _gameData.CurrentLevelName = "Level 1";
-        
+
         SceneManager.LoadScene(_gameData.CurrentLevelName);
     }
 
