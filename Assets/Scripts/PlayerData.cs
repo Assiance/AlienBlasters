@@ -39,8 +39,9 @@ public class CoinData : INamed
 }
 
 [Serializable]
-public class LaserData
+public class LaserData : INamed
 {
-    public string Name;
+    [field: SerializeField]
+    public string Name { get; set; }
     public bool IsOn;
 }
