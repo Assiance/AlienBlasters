@@ -31,9 +31,10 @@ public class LevelData
 }
 
 [Serializable]
-public class CoinData
+public class CoinData : INamed
 {
-    public string Name;
+    [field: SerializeField]
+    public string Name { get; set; }
     public bool IsCollected;
 }
 

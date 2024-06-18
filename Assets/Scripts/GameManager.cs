@@ -66,8 +66,9 @@ public class GameManager : MonoBehaviour
                 _gameData.LevelDatas.Add(levelData);
             }
 
+            Bind<Coin, CoinData>(levelData.CoinDatas);
             BindLasers(levelData);
-            BindCoins(levelData);
+           // BindCoins(levelData);
 
             var allPlayers = FindObjectsOfType<Player>();
             foreach (var player in allPlayers)
@@ -83,6 +84,24 @@ public class GameManager : MonoBehaviour
                 }
             }
             //SaveGame();
+        }
+    }
+
+    void Bind<T, D>(List<D> datas) 
+        where T : MonoBehaviour, IBind<D> 
+        where D : INamed, new()
+    {
+        var instances = FindObjectsOfType<T>();
+        foreach (var instance in instances)
+        {
+            var data = datas.FirstOrDefault(d => d.Name == instance.name);
+            if (data == null)
+            {
+                data = new D() { Name = instance.name };
+                datas.Add(data);
+            }
+
+            instance.Bind(data);
         }
     }
 
@@ -197,4 +216,9 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetString("AllGameNames", commaSeperatedGameNames);
         PlayerPrefs.Save();
     }
+}
+
+public interface INamed
+{
+    public string Name { get; set; }
 }
