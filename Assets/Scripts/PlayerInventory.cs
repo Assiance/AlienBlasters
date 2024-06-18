@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour, IBind<PlayerData>
 
     PlayerInput _playerInput;
 
-    IItem EquippedItem
+    Item EquippedItem
     {
         get
         {
@@ -17,7 +17,7 @@ public class PlayerInventory : MonoBehaviour, IBind<PlayerData>
         }
     }
 
-    List<IItem> _items = new List<IItem>();
+    List<Item> _items = new List<Item>();
     int _currentItemIndex;
     PlayerData _data;
 
@@ -27,7 +27,7 @@ public class PlayerInventory : MonoBehaviour, IBind<PlayerData>
         _playerInput.actions["Fire"].performed += UseEquippedItem;
         _playerInput.actions["EquipNext"].performed += EquipNext;
 
-        foreach (var item in GetComponentsInChildren<IItem>())
+        foreach (var item in GetComponentsInChildren<Item>())
             Pickup(item, false);
     }
 
@@ -60,7 +60,7 @@ public class PlayerInventory : MonoBehaviour, IBind<PlayerData>
             EquippedItem.Use();
     }
 
-    public void Pickup(IItem item, bool persist = true)
+    public void Pickup(Item item, bool persist = true)
     {
         item.transform.SetParent(ItemPoint);
         item.transform.localPosition = Vector3.zero;
@@ -86,7 +86,7 @@ public class PlayerInventory : MonoBehaviour, IBind<PlayerData>
         foreach (var itemName in _data.Items)
         {
             var itemGameObject = GameObject.Find(itemName);
-            if (itemGameObject != null && itemGameObject.TryGetComponent<IItem>(out var item))
+            if (itemGameObject != null && itemGameObject.TryGetComponent<Item>(out var item))
                 Pickup(item);
         }
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Blaster : MonoBehaviour, IItem
+public class Blaster : Item
 {
     [SerializeField] Transform _firePoint;
 
@@ -12,7 +12,7 @@ public class Blaster : MonoBehaviour, IItem
         _player = GetComponentInParent<Player>();
     }
 
-    public void Use()
+    public override void Use()
     {
         var shot = PoolManager.Instance.GetBlasterShot();
         shot.Launch(_player.Direction, _firePoint.position);
