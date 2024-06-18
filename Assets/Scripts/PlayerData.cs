@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [Serializable]
-public class PlayerData
+public class PlayerData : INamed
 {
     //DO NOT USE PROPERTIES. THEY DONT SHOW UP IN THE INSPECTOR
     public int Coins;
     public int Health = 6;
     public Vector2 Position;
     public Vector2 Velocity;
+    public List<string> Items = new List<string>();
+    [field: SerializeField]
+    public string Name { get; set; }
 }
 
 [Serializable]
