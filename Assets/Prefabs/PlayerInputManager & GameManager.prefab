@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7020775871684984542}
   - component: {fileID: 9152589720969406634}
   - component: {fileID: 7863360018867964662}
+  - component: {fileID: 2883116184729809941}
   m_Layer: 0
   m_Name: PlayerInputManager & GameManager
   m_TagString: Untagged
@@ -94,6 +95,8 @@ MonoBehaviour:
   _gameData:
     PlayerDatas: []
     GameName: 
+    CurrentLevelName: 
+    LevelDatas: []
 --- !u!114 &7863360018867964662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,3 +111,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blasterShotPrefab: {fileID: 4955502633045071458, guid: 7ecd34c699f6f7f46a4ea7b319a3a0ff, type: 3}
   _blasterImpactExplosionPrefab: {fileID: 3048269088227799951, guid: 1d82c2e25fed8fc458376d6c6e0ab0ac, type: 3}
+  _catBombPrefab: {fileID: 4690886117279366490, guid: c2d2dc5bcd182d94490c88b1896807fa, type: 3}
+  _spikePrefab: {fileID: 2326326323978828183, guid: 3e69b3c1d9a7893499134ef68a7cda75, type: 3}
+--- !u!114 &2883116184729809941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123366571941031464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: aa185ef621534f94eb1ff3de7bade925, type: 2}
+    - {fileID: 11400000, guid: d14cba00c0fc69e4fbb833ed72d24e35, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9152589720969406634}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: ToggleCinematic
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9152589720969406634}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: ToggleCinematic
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

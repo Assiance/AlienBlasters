@@ -22,4 +22,9 @@ public class SplineAttackPoints : MonoBehaviour
             Gizmos.DrawSphere(position, 0.2f);
         }
     }
+
+    public Queue<float> GetAsQueue()
+    {
+        return new Queue<float>(_attackPoints);
+    }
 }

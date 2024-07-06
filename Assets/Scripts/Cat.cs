@@ -19,7 +19,10 @@ public class Cat : MonoBehaviour
     void SpawnCatBomb()
     {
         if (_catBomb == null)
-            _catBomb = Instantiate(_catBombPrefab, _firePoint);
+        {
+            _catBomb = PoolManager.Instance.GetCatBomb();
+            _catBomb.transform.position = _firePoint.position;
+        }
     }
 
     void ShootCatBomb()
